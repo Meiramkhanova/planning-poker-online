@@ -29,10 +29,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     const initAuth = async () => {
       try {
-        const res = await client.get<User>("/auth/me");
+        const res = await client.get<User & { accessToken: string }>(
+          "/auth/me",
+        );
+        setAccessToken(res.data.accessToken);
         setUser(res.data);
-      } catch (e) {
-        console.log("Сессия не найдена");
+      } catch (e: any) {
+        if (e.response?.status !== 401) {
+          console.error("Ошибка при инициализации:", e);
+        }
       } finally {
         setIsInitializing(false);
       }
