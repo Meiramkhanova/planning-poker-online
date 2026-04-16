@@ -1,5 +1,9 @@
 function OnBoardingPage() {
-  return <div>OnBoardingPage</div>;
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      OnBoardingPage
+    </div>
+  );
 }
 
 export default OnBoardingPage;
