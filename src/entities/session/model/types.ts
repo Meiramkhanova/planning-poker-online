@@ -1,7 +1,12 @@
-export interface AuthPayload {
+export interface LoginCredentials {
   email: string;
-  name?: string;
   password: string;
+}
+
+export interface RegisterCredentials {
+  email: string;
+  password: string;
+  name: string;
 }
 
 export interface User {
