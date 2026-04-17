@@ -1,5 +1,11 @@
+import { Link } from "react-router-dom";
+
 function DashboardPage() {
-  return <div>DashboardPage</div>;
+  return (
+    <div>
+      DashboardPage <Link to="/">dd</Link>
+    </div>
+  );
 }
 
 export default DashboardPage;
