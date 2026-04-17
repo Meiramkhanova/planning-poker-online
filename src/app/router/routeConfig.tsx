@@ -1,9 +1,9 @@
 import OnBoardingPage from "@/pages/onboarding";
 import { PublicRoute } from "./PublicRoute";
 import { LoginPage } from "@/pages/login";
-import RegisterPage from "@/pages/register";
 import { ProtectedRoute } from "./ProtectedRoute";
 import DashboardPage from "@/pages/dashboard";
+import { RegisterPage } from "@/pages/register";
 
 export const routeConfig = [
   {
