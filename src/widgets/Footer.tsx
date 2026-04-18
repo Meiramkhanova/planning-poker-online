@@ -9,7 +9,7 @@ function Footer() {
           <div className="flex items-center justify-between">
             <TheLogo />
 
-            <p className="text-sm text-gray-600">
+            <p className="text-xs text-gray-600">
               Copyright &copy; PlanPoker Online {new Date().getFullYear()}
             </p>
           </div>

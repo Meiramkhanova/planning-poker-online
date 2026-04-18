@@ -8,7 +8,11 @@ interface ContainerProps {
 
 function Container({ children, className }: ContainerProps) {
   return (
-    <div className={cn("container mx-auto px-6 md:px-8 xl:px-10", className)}>
+    <div
+      className={cn(
+        "container mx-auto px-6 md:px-8 xl:px-10 2xl:px-12",
+        className,
+      )}>
       {children}
     </div>
   );

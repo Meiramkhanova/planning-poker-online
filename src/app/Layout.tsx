@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 
 export const Layout = () => {
   return (
-    <div className="app-container bg-sky-50">
+    <div className="app-container bg-sky-50/75">
       <Header />
 
       <main>
