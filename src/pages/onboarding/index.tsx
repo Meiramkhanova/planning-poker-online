@@ -1,9 +1,7 @@
+import MainSection from "@/widgets/onboarding/MainSection";
+
 function OnBoardingPage() {
-  return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      OnBoardingPage
-    </div>
-  );
+  return <MainSection />;
 }
 
 export default OnBoardingPage;
