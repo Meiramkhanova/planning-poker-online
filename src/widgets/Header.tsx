@@ -15,7 +15,7 @@ function Header() {
               <Link
                 to="/login"
                 className={cn(
-                  "bg-sky-600 text-white px-4 py-2 rounded-md",
+                  "bg-sky-600 border border-sky-600 text-white px-4 py-2 rounded",
                   "hover:bg-sky-700 transition-colors duration-300",
                 )}>
                 Sign In
@@ -24,8 +24,8 @@ function Header() {
               <Link
                 to="/register"
                 className={cn(
-                  "bg-sky-600 text-white px-4 py-2 rounded-md",
-                  "hover:bg-sky-700 transition-colors duration-300",
+                  "border-sky-600 border text-sky-600 bg-white px-4 py-2 rounded",
+                  "hover:bg-sky-600 hover:text-white transition-colors duration-300",
                 )}>
                 Sign Up
               </Link>
