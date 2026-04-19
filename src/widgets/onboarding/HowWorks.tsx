@@ -5,7 +5,7 @@ function HowWorks() {
   return (
     <section className="how-it-works">
       <Container>
-        <div className="wrapper py-8 flex flex-col gap-12">
+        <div className="wrapper pb-8 xl:pb-12 flex flex-col gap-12">
           <div className="headlines flex flex-col gap-8">
             <h5 className="text-sky-800 uppercase text-sm">how it works</h5>
 
@@ -13,7 +13,7 @@ function HowWorks() {
           </div>
 
           <div className="info-cards grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">
-            <div className="info-card bg-white border border-gray-100 rounded-xl flex flex-col gap-4 p-4">
+            <div className="info-card shadow-xs bg-white border border-gray-100 rounded-xl flex flex-col gap-4 p-4">
               <div className="lines grid grid-cols-4 gap-2">
                 <div className="h-1.5 rounded-xs bg-gray-100" />
                 <div className="h-1.5 rounded-xs bg-gray-50" />
@@ -43,7 +43,7 @@ function HowWorks() {
               </div>
             </div>
 
-            <div className="info-card bg-white border border-gray-100 rounded-xl flex flex-col gap-4 p-4">
+            <div className="info-card shadow-xs bg-white border border-gray-100 rounded-xl flex flex-col gap-4 p-4">
               <div className="lines grid grid-cols-4 gap-2">
                 <div className="h-1.5 rounded-xs bg-gray-100" />
                 <div className="h-1.5 rounded-xs bg-gray-100" />
@@ -71,7 +71,7 @@ function HowWorks() {
               </div>
             </div>
 
-            <div className="info-card bg-white border border-gray-100 rounded-xl flex flex-col gap-4 p-4">
+            <div className="info-card shadow-xs bg-white border border-gray-100 rounded-xl flex flex-col gap-4 p-4">
               <div className="lines grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2">
                 <div className="h-1.5 rounded-xs bg-gray-100" />
                 <div className="h-1.5 rounded-xs bg-gray-100" />
@@ -101,7 +101,7 @@ function HowWorks() {
               </div>
             </div>
 
-            <div className="info-card bg-white border border-gray-100 rounded-xl flex flex-col gap-4 p-4">
+            <div className="info-card shadow-xs bg-white border border-gray-100 rounded-xl flex flex-col gap-4 p-4">
               <div className="lines grid grid-cols-4 gap-2">
                 <div className="h-1.5 rounded-xs bg-gray-100" />
                 <div className="h-1.5 rounded-xs bg-gray-100" />

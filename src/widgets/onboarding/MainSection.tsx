@@ -5,7 +5,7 @@ import PokerUi from "./PokerUi";
 function MainSection() {
   return (
     <section className="main-info">
-      <div className="outer-wrapper xl:h-[calc(100vh-64px)] flex items-center py-8">
+      <div className="outer-wrapper xl:h-[calc(100vh-64px)] flex items-center py-8 xl:py-12">
         <Container>
           <div className="wrapper grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="left-info-section flex flex-col gap-8">

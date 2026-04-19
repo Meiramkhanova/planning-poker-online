@@ -1,5 +1,6 @@
 import HowWorks from "@/widgets/onboarding/HowWorks";
 import MainSection from "@/widgets/onboarding/MainSection";
+import WhyUs from "@/widgets/onboarding/WhyUs";
 
 function OnBoardingPage() {
   return (
@@ -7,6 +8,8 @@ function OnBoardingPage() {
       <MainSection />
 
       <HowWorks />
+
+      <WhyUs />
     </>
   );
 }

@@ -68,11 +68,11 @@ const cards = [
 
 function PokerUi() {
   return (
-    <div className="poker-ui border border-sky-100 rounded-xl overflow-hidden text-xs text-gray-700 bg-sky-50">
+    <div className="poker-ui border border-gray-100 rounded-xl overflow-hidden text-xs text-gray-700 bg-sky-50">
       <div
         className={cn(
           "ui-top bg-white grid grid-cols-2 sm:grid-cols-3 items-center",
-          "border-b border-sky-100 p-4 gap-4 md:grid-cols-2 lg:grid-cols-3",
+          "border-b border-gray-100 p-4 gap-4 md:grid-cols-2 lg:grid-cols-3",
         )}>
         <div
           className={cn(
@@ -96,7 +96,7 @@ function PokerUi() {
       </div>
 
       <div className="ui-bottom p-4 flex flex-col gap-20">
-        <div className="current-task border border-sky-100 bg-white p-4 rounded-lg flex flex-col gap-1">
+        <div className="current-task border border-gray-100 bg-white p-4 rounded-lg flex flex-col gap-1">
           <p className="uppercase">Current Task</p>
 
           <p className="text-gray-700 font-medium capitalize">
@@ -107,7 +107,7 @@ function PokerUi() {
         <div className="ui-table relative flex justify-center w-full">
           <div
             className={cn(
-              "border border-sky-200 h-24 w-3/5 rounded-full bg-sky-200/65 justify-center",
+              "border h-24 w-3/5 rounded-full bg-sky-200/65 justify-center",
               "text-white flex items-center gap-1.5 text-sm font-medium border-sky-200",
             )}>
             <Eye className="size-4" />
