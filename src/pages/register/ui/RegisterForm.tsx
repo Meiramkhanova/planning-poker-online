@@ -11,7 +11,7 @@ import {
 import { cn } from "@/lib/utils";
 
 export const RegisterForm = () => {
-  const { register: signUp, isProcessing } = useSessionStore();
+  const { register: signUp, isProcessing, error } = useSessionStore();
 
   const {
     register,
@@ -25,7 +25,7 @@ export const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      {/* {error && <div className="text-red-500 text-center">{error}</div>} */}
+      {error && <div className="text-red-500 text-center">{error}</div>}
 
       <Field>
         <FieldLabel className="text-gray-700">Full Name</FieldLabel>
