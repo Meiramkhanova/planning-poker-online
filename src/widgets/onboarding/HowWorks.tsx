@@ -36,7 +36,7 @@ function HowWorks() {
                 <div
                   className={cn(
                     "size-9 rounded-full border border-gray-100 bg-gray-50",
-                    "flex items-center justify-center shrink-0 shadow-xs",
+                    "flex items-center justify-center shrink-0 shadow-xs text-sm",
                   )}>
                   1
                 </div>
@@ -64,7 +64,7 @@ function HowWorks() {
                 <div
                   className={cn(
                     "size-8 rounded-full border border-gray-100 bg-gray-50",
-                    "flex items-center justify-center shrink-0 shadow-xs",
+                    "flex items-center justify-center shrink-0 shadow-xs text-sm",
                   )}>
                   2
                 </div>
@@ -94,7 +94,7 @@ function HowWorks() {
                 <div
                   className={cn(
                     "size-8 rounded-full border border-gray-100 bg-gray-50",
-                    "flex items-center justify-center shrink-0 shadow-xs",
+                    "flex items-center justify-center shrink-0 shadow-xs text-sm",
                   )}>
                   3
                 </div>
@@ -124,7 +124,7 @@ function HowWorks() {
                 <div
                   className={cn(
                     "size-8 rounded-full border border-gray-100 bg-gray-50",
-                    "flex items-center justify-center shrink-0 shadow-xs",
+                    "flex items-center justify-center shrink-0 shadow-xs text-sm",
                   )}>
                   4
                 </div>

@@ -8,9 +8,10 @@ import {
   registerSchema,
   type RegisterFormValues,
 } from "../model/registerSchema";
+import { cn } from "@/lib/utils";
 
 export const RegisterForm = () => {
-  const { register: signUp, isProcessing, error } = useSessionStore();
+  const { register: signUp, isProcessing } = useSessionStore();
 
   const {
     register,
@@ -24,43 +25,59 @@ export const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      {error && <div className="text-red-500 text-center">{error}</div>}
+      {/* {error && <div className="text-red-500 text-center">{error}</div>} */}
 
       <Field>
-        <FieldLabel>Name</FieldLabel>
+        <FieldLabel className="text-gray-700">Full Name</FieldLabel>
         <Input
           {...register("name")}
-          className={
-            errors.name ? "border-red-500 focus-visible:ring-red-500" : ""
-          }
+          className={cn(
+            "py-5 rounded",
+            errors.email &&
+              "border-red-300 focus-visible:ring-red-300 focus-visible:border-red-300",
+          )}
+          placeholder="Enter your full name"
         />
         {errors.name && <span>{errors.name.message}</span>}
       </Field>
 
       <Field>
-        <FieldLabel>Email</FieldLabel>
+        <FieldLabel className="text-gray-700">Email</FieldLabel>
         <Input
           {...register("email")}
-          className={
-            errors.email ? "border-red-500 focus-visible:ring-red-500" : ""
-          }
+          type="email"
+          className={cn(
+            "py-5 rounded",
+            errors.email &&
+              "border-red-300 focus-visible:ring-red-300 focus-visible:border-red-300",
+          )}
+          placeholder="you@example.com"
         />
         {errors.email && <span>{errors.email.message}</span>}
       </Field>
 
       <Field>
-        <FieldLabel>Password</FieldLabel>
+        <FieldLabel className="text-gray-700">Password</FieldLabel>
         <Input
           type="password"
           {...register("password")}
-          className={
-            errors.password ? "border-red-500 focus-visible:ring-red-500" : ""
-          }
+          className={cn(
+            "py-5 rounded",
+            errors.email &&
+              "border-red-300 focus-visible:ring-red-300 focus-visible:border-red-300",
+          )}
+          placeholder="Enter your password"
         />
         {errors.password && <span>{errors.password.message}</span>}
       </Field>
 
-      <Button type="submit" disabled={isProcessing}>
+      <Button
+        className={cn(
+          "py-5 rounded bg-sky-600 border border-sky-600 text-white px-4",
+          "hover:bg-sky-700 transition-colors duration-300",
+        )}
+        type="submit"
+        disabled={isProcessing}>
         Sign Up
       </Button>
     </form>

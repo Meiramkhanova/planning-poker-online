@@ -1,13 +1,33 @@
+import { Link } from "react-router-dom";
 import { RegisterForm } from "./RegisterForm";
+import PlanPoker from "@/shared/ui/PlanPoker";
+import Container from "@/shared/ui/Container";
 
 const RegisterPage = () => {
   return (
-    <div className="flex h-[calc(100vh-64px)] items-center justify-center bg-background">
-      <div className="w-full max-w-sm p-6">
-        <h1 className="mb-6 text-2xl font-bold text-center">Sign Up</h1>
+    <div className="wrapper h-full flex items-center">
+      <Container>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-center">
+          <PlanPoker />
 
-        <RegisterForm />
-      </div>
+          <div className="flex flex-col gap-4">
+            <div className="text-2xl text-gray-700 font-bold">
+              Create Account
+            </div>
+
+            <div className="text-gray-500">Sign up to get started</div>
+
+            <RegisterForm />
+
+            <div className="text-center text-gray-500 text-sm pt-4">
+              Already have an account?{" "}
+              <Link to="/login" className="text-gray-700">
+                Sign In
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Container>
     </div>
   );
 };
