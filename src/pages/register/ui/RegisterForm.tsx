@@ -71,13 +71,7 @@ export const RegisterForm = () => {
         {errors.password && <span>{errors.password.message}</span>}
       </Field>
 
-      <Button
-        className={cn(
-          "py-5 rounded bg-sky-600 border border-sky-600 text-white px-4",
-          "hover:bg-sky-700 transition-colors duration-300",
-        )}
-        type="submit"
-        disabled={isProcessing}>
+      <Button type="submit" disabled={isProcessing}>
         Sign Up
       </Button>
     </form>

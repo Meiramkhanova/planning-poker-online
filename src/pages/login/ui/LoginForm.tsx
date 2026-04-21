@@ -59,13 +59,7 @@ export const LoginForm = () => {
         )}
       </Field>
 
-      <Button
-        className={cn(
-          "py-5 rounded bg-sky-600 border border-sky-600 text-white px-4",
-          "hover:bg-sky-700 transition-colors duration-300",
-        )}
-        type="submit"
-        disabled={isProcessing}>
+      <Button type="submit" disabled={isProcessing}>
         Sign In
       </Button>
     </form>
