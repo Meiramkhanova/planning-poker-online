@@ -1,4 +1,3 @@
-import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -36,11 +35,11 @@ function RoomCard({ room }: { room: Room }) {
               </div>
             </div>
 
-            {room?.active_task_title ? (
+            {/* {room?.active_task_title ? (
               <Badge>{room?.active_task_title}</Badge>
             ) : (
               <Badge variant="outline">Idle</Badge>
-            )}
+            )} */}
           </div>
         </CardTitle>
 

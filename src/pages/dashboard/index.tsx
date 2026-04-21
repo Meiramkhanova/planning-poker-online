@@ -14,8 +14,6 @@ function DashboardPage() {
     return <LoadingElement />;
   }
 
-  console.log("rooms", rooms);
-
   if (isError) {
     return (
       <div className="error-wrapper py-8 size-full flex items-center justify-center text-center">
