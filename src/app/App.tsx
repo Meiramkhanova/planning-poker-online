@@ -3,6 +3,7 @@ import { useSessionStore } from "@/entities/session/model/store";
 import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { routeConfig } from "./router/routeConfig";
+import LoadingElement from "@/shared/ui/LoadingElement";
 
 const queryClient = new QueryClient();
 const router = createBrowserRouter(routeConfig);
@@ -15,16 +16,14 @@ function App() {
     checkAuth();
   }, []);
 
-  if (isLoading) {
-    return <div>Loading of page</div>;
-  }
-
   return (
-    <>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      {isLoading ? (
+        <LoadingElement className="h-screen" />
+      ) : (
         <RouterProvider router={router} />
-      </QueryClientProvider>
-    </>
+      )}
+    </QueryClientProvider>
   );
 }
 

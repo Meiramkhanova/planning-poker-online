@@ -51,17 +51,7 @@ function Header() {
                   <DropdownMenuTrigger
                     asChild
                     className="focus:outline-none border border-gray-200 uppercase">
-                    <Button className="bg-transparent text-gray-700 py-5 flex items-center min-w-12">
-                      {/* <div
-                        style={{
-                          backgroundColor: user?.avatar_color || "#e5e7eb",
-                        }}
-                        className={cn(
-                          "circle-name size-8 border border-gray-100 rounded-full",
-                          "flex items-center justify-center uppercase",
-                        )}>
-                        {initialLetterName}
-                      </div> */}
+                    <Button variant="secondary" className="min-w-12">
                       {initialLetterName}
                     </Button>
                   </DropdownMenuTrigger>

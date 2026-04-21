@@ -20,6 +20,7 @@ export const useSessionStore = create<sessionStore>((set) => ({
   isLoading: true,
   isProcessing: false,
   error: null,
+
   login: async (data: LoginCredentials) => {
     set({ isProcessing: true, error: null });
 
@@ -41,8 +42,10 @@ export const useSessionStore = create<sessionStore>((set) => ({
       set({ isProcessing: false });
     }
   },
+
   register: async (data: RegisterCredentials) => {
     set({ isProcessing: true, error: null });
+
     try {
       const response = await registerRequest(data);
       const { access_token, user } = response;
@@ -61,6 +64,7 @@ export const useSessionStore = create<sessionStore>((set) => ({
       set({ isProcessing: false });
     }
   },
+
   logout: () => {
     localStorage.removeItem("accessToken");
 
@@ -70,6 +74,7 @@ export const useSessionStore = create<sessionStore>((set) => ({
       error: null,
     });
   },
+
   checkAuth: async () => {
     set({ isLoading: true });
 
