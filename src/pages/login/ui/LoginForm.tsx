@@ -36,7 +36,7 @@ export const LoginForm = () => {
           placeholder="you@example.com"
         />
         {errors.email && (
-          <span className="text-gray-700 text-sm">{errors.email.message}</span>
+          <span className="text-sm text-red-400">{errors.email.message}</span>
         )}
       </Field>
 
@@ -53,7 +53,7 @@ export const LoginForm = () => {
           placeholder="Enter your password"
         />
         {errors.password && (
-          <span className="text-gray-700 text-sm">
+          <span className="text-sm text-red-400">
             {errors.password.message}
           </span>
         )}

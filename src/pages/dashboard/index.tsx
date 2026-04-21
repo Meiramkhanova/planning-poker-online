@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button";
-
 import { useRooms } from "@/entities/room/model/useRooms";
 import Container from "@/shared/ui/Container";
 import LoadingElement from "@/shared/ui/LoadingElement";
+import CreateRoom from "@/widgets/dashboard/CreateRoom";
 import EmptyRooms from "@/widgets/dashboard/EmptyRooms";
 import RoomCard from "@/widgets/dashboard/RoomCard";
-import { Plus } from "lucide-react";
 
 function DashboardPage() {
   const { data: rooms, isLoading, isError } = useRooms();
@@ -35,11 +33,7 @@ function DashboardPage() {
             <p className="text-gray-700">Manage your planning poker sessions</p>
           </div>
 
-          <Button>
-            <Plus className="size-4" />
-
-            <span>Create Room</span>
-          </Button>
+          <CreateRoom />
         </div>
 
         {rooms?.length === 0 ? (

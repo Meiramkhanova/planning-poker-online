@@ -5,6 +5,7 @@ import { ProtectedRoute } from "./ProtectedRoute";
 import DashboardPage from "@/pages/dashboard";
 import { RegisterPage } from "@/pages/register";
 import { Layout } from "../Layout";
+import RoomPage from "@/pages/room";
 
 export const routeConfig = [
   {
@@ -23,7 +24,10 @@ export const routeConfig = [
       },
       {
         element: <ProtectedRoute />,
-        children: [{ path: "/dashboard", element: <DashboardPage /> }],
+        children: [
+          { path: "/dashboard", element: <DashboardPage /> },
+          { path: "/rooms/:roomId", element: <RoomPage /> },
+        ],
       },
     ],
   },

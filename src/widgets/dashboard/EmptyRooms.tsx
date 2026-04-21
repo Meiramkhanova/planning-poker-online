@@ -1,6 +1,4 @@
-import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Plus } from "lucide-react";
 
 function EmptyRooms() {
   return (
@@ -12,11 +10,6 @@ function EmptyRooms() {
       <p className="text-gray-500">
         No rooms found. Create your first planning session!
       </p>
-      <Button>
-        <Plus className="size-4" />
-
-        <span>Create first room</span>
-      </Button>
     </div>
   );
 }

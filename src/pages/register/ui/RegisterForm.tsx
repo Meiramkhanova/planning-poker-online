@@ -38,7 +38,9 @@ export const RegisterForm = () => {
           )}
           placeholder="Enter your full name"
         />
-        {errors.name && <span>{errors.name.message}</span>}
+        {errors.name && (
+          <span className="text-sm text-red-400">{errors.name.message}</span>
+        )}
       </Field>
 
       <Field>
@@ -53,7 +55,9 @@ export const RegisterForm = () => {
           )}
           placeholder="you@example.com"
         />
-        {errors.email && <span>{errors.email.message}</span>}
+        {errors.email && (
+          <span className="text-sm text-red-400">{errors.email.message}</span>
+        )}
       </Field>
 
       <Field>
@@ -68,7 +72,11 @@ export const RegisterForm = () => {
           )}
           placeholder="Enter your password"
         />
-        {errors.password && <span>{errors.password.message}</span>}
+        {errors.password && (
+          <span className="text-sm text-red-400">
+            {errors.password.message}
+          </span>
+        )}
       </Field>
 
       <Button type="submit" disabled={isProcessing}>

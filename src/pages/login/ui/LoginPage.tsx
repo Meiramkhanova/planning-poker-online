@@ -5,7 +5,7 @@ import PlanPoker from "@/shared/ui/PlanPoker";
 
 const LoginPage = () => {
   return (
-    <div className="wrapper h-full flex items-center">
+    <div className="wrapper h-full flex items-center py-8 xl:py-12">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-center">
           <PlanPoker />

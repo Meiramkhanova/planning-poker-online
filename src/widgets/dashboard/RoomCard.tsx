@@ -90,7 +90,7 @@ function RoomCard({ room }: { room: Room }) {
         </div>
       </CardContent>
 
-      <CardFooter>
+      <CardFooter className="mt-auto">
         <div className="btns grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
           <Button>Copy Invite</Button>
 
