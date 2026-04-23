@@ -26,7 +26,7 @@ export const routeConfig = [
         element: <ProtectedRoute />,
         children: [
           { path: "/dashboard", element: <DashboardPage /> },
-          { path: "/dashboard/rooms/:roomId", element: <RoomPage /> },
+          { path: "/dashboard/room/:roomId", element: <RoomPage /> },
         ],
       },
     ],

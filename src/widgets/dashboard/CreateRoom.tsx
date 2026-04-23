@@ -45,7 +45,7 @@ function CreateRoom() {
   const onSubmit = (values: CreateRoomFormValues) => {
     mutate(values, {
       onSuccess: (newRoom) => {
-        const targetPath = `/dashboard/rooms/${newRoom.room.slug}`;
+        const targetPath = `/dashboard/room/${newRoom.room.slug}`;
         navigate(targetPath);
       },
       onError: (error: any) => {

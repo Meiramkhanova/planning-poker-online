@@ -21,7 +21,9 @@ function App() {
       {isLoading ? (
         <LoadingElement className="h-screen" />
       ) : (
-        <RouterProvider router={router} />
+        <>
+          <RouterProvider router={router} />
+        </>
       )}
     </QueryClientProvider>
   );

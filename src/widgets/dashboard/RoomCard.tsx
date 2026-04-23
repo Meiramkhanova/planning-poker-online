@@ -13,17 +13,30 @@ import { cn } from "@/lib/utils";
 import { formatRelativeTime } from "@/shared/lib/formatRelativeTime";
 import { MoveUpRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 function RoomCard({ room }: { room: Room }) {
   const navigate = useNavigate();
 
   const handleOpenRoom = () => {
-    const targetPath = `/dashboard/rooms/${room.slug}`;
+    const targetPath = `/dashboard/room/${room.slug}`;
     navigate(targetPath);
   };
 
-  const handleInviteLink = () => {
-    navigate(room.invite_link);
+  const handleCopyInvite = async () => {
+    const links = room.invite_link.split(",");
+
+    const inviteUrl =
+      links.find((link) => link.includes("http://localhost:5173")) || links[0];
+
+    try {
+      await navigator.clipboard.writeText(inviteUrl);
+
+      toast.success("Link copied to clipboard");
+    } catch (err) {
+      toast.error("Failed to copy link");
+      console.log("err", err);
+    }
   };
 
   return (
@@ -104,7 +117,7 @@ function RoomCard({ room }: { room: Room }) {
 
       <CardFooter className="mt-auto">
         <div className="btns grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
-          <Button onClick={handleInviteLink}>Copy Invite</Button>
+          <Button onClick={handleCopyInvite}>Copy Invite</Button>
 
           <Button
             onClick={handleOpenRoom}

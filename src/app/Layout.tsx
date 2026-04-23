@@ -1,6 +1,7 @@
 import Footer from "@/widgets/Footer";
 import Header from "@/widgets/Header";
 import { Outlet } from "react-router-dom";
+import { Toaster } from "@/components/ui/sonner";
 
 export const Layout = () => {
   return (
@@ -10,6 +11,8 @@ export const Layout = () => {
       <main className="grow">
         <Outlet />
       </main>
+
+      <Toaster position="bottom-right" />
 
       <Footer />
     </div>
