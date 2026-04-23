@@ -12,8 +12,20 @@ import type { Room } from "@/entities/room/model/types";
 import { cn } from "@/lib/utils";
 import { formatRelativeTime } from "@/shared/lib/formatRelativeTime";
 import { MoveUpRight } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 function RoomCard({ room }: { room: Room }) {
+  const navigate = useNavigate();
+
+  const handleOpenRoom = () => {
+    const targetPath = `/dashboard/rooms/${room.slug}`;
+    navigate(targetPath);
+  };
+
+  const handleInviteLink = () => {
+    navigate(room.invite_link);
+  };
+
   return (
     <Card>
       <CardHeader>
@@ -71,7 +83,7 @@ function RoomCard({ room }: { room: Room }) {
 
             <p className="text-gray-700">
               {room?.active_task_title
-                ? "room?.active_task_title"
+                ? room?.active_task_title
                 : "No task running"}
             </p>
           </div>
@@ -92,9 +104,12 @@ function RoomCard({ room }: { room: Room }) {
 
       <CardFooter className="mt-auto">
         <div className="btns grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
-          <Button>Copy Invite</Button>
+          <Button onClick={handleInviteLink}>Copy Invite</Button>
 
-          <Button className="border border-gray-200" variant="outline">
+          <Button
+            onClick={handleOpenRoom}
+            className="border border-gray-200"
+            variant="outline">
             <span>Open</span>
 
             <MoveUpRight className="size-3.5" />
