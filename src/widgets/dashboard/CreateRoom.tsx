@@ -48,6 +48,11 @@ function CreateRoom() {
         const targetPath = `/rooms/${newRoom.room.id}`;
         navigate(targetPath);
       },
+      onError: (error: any) => {
+        const messageErr = error.response?.data?.message || "Server Error";
+
+        form.setError("root", { message: messageErr });
+      },
     });
   };
 
@@ -136,6 +141,12 @@ function CreateRoom() {
               </Field>
             )}
           />
+
+          {form.formState.errors.root && (
+            <p className="text-red-400">
+              {form?.formState?.errors?.root?.message}
+            </p>
+          )}
 
           <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? "Creating..." : "Create Room"}
