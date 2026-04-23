@@ -45,10 +45,7 @@ function CreateRoom() {
   const onSubmit = (values: CreateRoomFormValues) => {
     mutate(values, {
       onSuccess: (newRoom) => {
-        // navigate(`/rooms/${newRoom.room.id}`);
-        console.log("Full response:", newRoom);
         const targetPath = `/rooms/${newRoom.room.id}`;
-        console.log("Navigating to:", targetPath);
         navigate(targetPath);
       },
     });
@@ -68,7 +65,9 @@ function CreateRoom() {
         <DialogHeader>
           <DialogTitle className="text-gray-700">New Room</DialogTitle>
 
-          <DialogDescription>This action cannot be undone.</DialogDescription>
+          <DialogDescription>
+            Set up a new room to estimate tasks with your team.
+          </DialogDescription>
         </DialogHeader>
 
         <form
