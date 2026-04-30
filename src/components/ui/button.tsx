@@ -12,7 +12,7 @@ const buttonVariants = cva(
         default:
           "bg-sky-600 text-white rounded hover:bg-sky-700 transition-colors duration-300",
         outline:
-          "bg-white text-sky-600 hover:bg-sky-600 hover:text-white transition-colors duration-300",
+          "bg-white border-sky-600 text-sky-600 hover:bg-sky-600 hover:text-white transition-colors duration-300",
         secondary:
           "bg-white hover:bg-gray-50 text-gray-700 transition-colors duration-300",
         ghost:
