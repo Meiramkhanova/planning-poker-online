@@ -17,7 +17,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Field, FieldError } from "@/components/ui/field";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { useCreateRoom } from "@/entities/room/model/useCreateRoom";
 import {
   Select,
   SelectContent,
@@ -26,7 +25,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useNavigate } from "react-router-dom";
-import { useDeckPresets } from "@/entities/room/model/useDeckPresets";
+import { useDeckPresets } from "@/entities/room/api/useDeckPresets";
+import { useCreateRoom } from "@/features/create-room/api/useCreateRoom";
 
 function CreateRoom() {
   const form = useForm<CreateRoomFormValues>({

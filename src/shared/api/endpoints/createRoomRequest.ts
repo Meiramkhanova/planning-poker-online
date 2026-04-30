@@ -1,7 +1,7 @@
 import type {
   CreateRoomCredentials,
   CreateRoomResponse,
-} from "@/entities/room/model/types";
+} from "@/features/create-room/types/types";
 import { apiInstance } from "../base";
 
 export const createRoomRequest = async (data: CreateRoomCredentials) => {

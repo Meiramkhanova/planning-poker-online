@@ -1,4 +1,4 @@
-import { useRooms } from "@/entities/room/model/useRooms";
+import { useRooms } from "@/entities/room/api/useRooms";
 import Container from "@/shared/ui/Container";
 import LoadingElement from "@/shared/ui/LoadingElement";
 import CreateRoom from "@/widgets/dashboard/CreateRoom";

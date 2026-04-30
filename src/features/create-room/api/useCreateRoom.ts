@@ -1,6 +1,6 @@
 import { createRoomRequest } from "@/shared/api";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import type { CreateRoomCredentials } from "./types";
+import type { CreateRoomCredentials } from "../types/types";
 
 export const useCreateRoom = () => {
   const queryClient = useQueryClient();

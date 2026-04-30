@@ -1,4 +1,3 @@
-import { Anchor } from "lucide-react";
 import type { ReactNode } from "react";
 
 interface ReasonCardProps {
