@@ -1,4 +1,9 @@
 import type { Participant } from "@/entities/participant/model/types";
+import type {
+  ActiveRound,
+  FullRoom,
+  History,
+} from "@/entities/room/model/types";
 import type { Task } from "@/entities/task/model/types";
 
 export interface CreateRoomCredentials {
@@ -12,73 +17,6 @@ export interface CreateRoomResponse {
   self_participant_id: string;
   participants: Participant[];
   tasks: Task[];
-  active_round: {
-    id: string;
-    task_id: string;
-    round_index: number;
-    status: string;
-    started_at: string;
-    revealed_at: string;
-    closed_at: string;
-    votes_submitted: number;
-    total_participants: number;
-    can_reveal: boolean;
-    suggested_result: string;
-    average_score: number;
-    consensus: boolean;
-    distribution: {
-      additionalProp1: number;
-      additionalProp2: number;
-      additionalProp3: number;
-    };
-    self_vote_value: string;
-    votes: [
-      {
-        participant_id: string;
-        user_id: string;
-        value: string;
-        has_voted: boolean;
-      },
-    ];
-  };
-  history: [
-    {
-      id: string;
-      round_id: string;
-      task_id: string;
-      task_title: string;
-      result_value: string;
-      average_score: number;
-      consensus: boolean;
-      votes_count: number;
-      distribution: {
-        additionalProp1: number;
-        additionalProp2: number;
-        additionalProp3: number;
-      };
-      created_at: string;
-    },
-  ];
-}
-
-export interface FullRoom {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  status: string;
-  owner_id: string;
-  current_task_id: string;
-  invite_link: string;
-  created_at: string;
-  updated_at: string;
-  deck: RoomDeckPreset;
-}
-
-export interface RoomDeckPreset {
-  id: number;
-  name: string;
-  code: string;
-  description: string;
-  cards: string[];
+  active_round: ActiveRound;
+  history: History[];
 }
