@@ -1,7 +1,7 @@
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { useRoomById } from "@/entities/room/api/useRoomById";
-import { cn } from "@/lib/utils";
+import { Badge } from "@/pages/register/ui/badge";
+import { Button } from "@/shared/ui/button";
+import { useRoomById } from "@/entities/room/model/useRoomById";
+import { cn } from "@/shared/utils/utils";
 import Container from "@/shared/ui/Container";
 import LoadingElement from "@/shared/ui/LoadingElement";
 import CopyInvite from "@/widgets/room/CopyInvite";

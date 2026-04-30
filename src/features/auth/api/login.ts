@@ -1,8 +1,5 @@
-import type {
-  AuthResponse,
-  LoginCredentials,
-} from "@/entities/session/model/types";
-import { apiInstance } from "../base";
+import { apiInstance } from "@/shared/api";
+import type { AuthResponse, LoginCredentials } from "../model/types";
 
 export const loginRequest = async (data: LoginCredentials) => {
   const res = await apiInstance.post<AuthResponse>("/auth/login", data);

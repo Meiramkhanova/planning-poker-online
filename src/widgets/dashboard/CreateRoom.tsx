@@ -5,8 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
+} from "@/shared/ui/dialog";
+import { Button } from "@/shared/ui/button";
 import { Plus } from "lucide-react";
 import { Controller, useForm } from "react-hook-form";
 import {
@@ -14,19 +14,19 @@ import {
   type CreateRoomFormValues,
 } from "@/features/create-room/model/schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Field, FieldError } from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
+import { Field, FieldError } from "@/shared/ui/field";
+import { Label } from "@/shared/ui/label";
+import { Input } from "@/shared/ui/input";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/shared/ui/select";
 import { useNavigate } from "react-router-dom";
-import { useDeckPresets } from "@/entities/room/api/useDeckPresets";
-import { useCreateRoom } from "@/features/create-room/api/useCreateRoom";
+import { useDeckPresets } from "@/entities/room/model/useDeckPresets";
+import { useCreateRoom } from "@/features/create-room/model/useCreateRoom";
 
 function CreateRoom() {
   const form = useForm<CreateRoomFormValues>({

@@ -1,5 +1,5 @@
-import { getRoomsRequest } from "@/shared/api";
 import { useQuery } from "@tanstack/react-query";
+import { getRoomsRequest } from "../api/rooms";
 
 export const useRooms = () => {
   return useQuery({

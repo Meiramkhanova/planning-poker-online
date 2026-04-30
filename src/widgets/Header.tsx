@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,9 +6,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/shared/ui/dropdown-menu";
 import { useSessionStore } from "@/entities/session/model/store";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils/utils";
 import Container from "@/shared/ui/Container";
 import TheLogo from "@/shared/ui/Logo";
 import { Link } from "react-router-dom";

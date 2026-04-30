@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import {
   Card,
   CardContent,
@@ -6,11 +6,11 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+} from "@/shared/ui/card";
+import { Separator } from "@/shared/ui/separator";
 import type { Room } from "@/entities/room/model/types";
-import { cn } from "@/lib/utils";
-import { formatRelativeTime } from "@/shared/lib/formatRelativeTime";
+import { cn } from "@/shared/utils/utils";
+import { formatRelativeTime } from "@/shared/utils/formatRelativeTime";
 import { MoveUpRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";

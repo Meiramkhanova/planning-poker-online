@@ -1,4 +1,4 @@
-import { getRoomByIdRequest } from "@/shared/api/endpoints/getRoomByIdRequest";
+import { getRoomByIdRequest } from "@/entities/room/api/getRoomByIdRequest";
 import { useQuery } from "@tanstack/react-query";
 
 export const useRoomById = (roomId: string) => {

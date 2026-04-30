@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useSessionStore } from "@/entities/session/model/store";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { Field, FieldLabel } from "@/shared/ui/field";
+import { Input } from "@/shared/ui/input";
+import { Button } from "@/shared/ui/button";
 import {
   registerSchema,
   type RegisterFormValues,
 } from "../model/registerSchema";
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils/utils";
 import { useShallow } from "zustand/react/shallow";
 
 export const RegisterForm = () => {
@@ -36,8 +36,6 @@ export const RegisterForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      {error && <div className="text-red-500 text-center">{error}</div>}
-
       <Field>
         <FieldLabel className="text-gray-700">Full Name</FieldLabel>
         <Input
@@ -93,6 +91,8 @@ export const RegisterForm = () => {
       <Button type="submit" disabled={isProcessing}>
         Sign Up
       </Button>
+
+      {error && <div className="text-red-500 text-center">{error}</div>}
     </form>
   );
 };

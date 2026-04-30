@@ -1,5 +1,5 @@
-import { Spinner } from "@/components/ui/spinner";
-import { cn } from "@/lib/utils";
+import { Spinner } from "@/shared/ui/spinner";
+import { cn } from "@/shared/utils/utils";
 
 function LoadingElement({ className }: { className?: string }) {
   return (

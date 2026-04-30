@@ -1,6 +1,12 @@
-import { getMe, loginRequest, registerRequest } from "@/shared/api";
-import type { LoginCredentials, RegisterCredentials, User } from "./types";
+import { loginRequest } from "@/features/auth/api/login";
+import type { User } from "./types";
 import { create } from "zustand";
+import { registerRequest } from "@/features/auth/api/register";
+import { getMe } from "../api/getMe";
+import type {
+  LoginCredentials,
+  RegisterCredentials,
+} from "@/features/auth/model/types";
 
 interface sessionStore {
   user: User | null;
@@ -35,7 +41,7 @@ export const useSessionStore = create<sessionStore>((set) => ({
         isAuthenticated: true,
       });
     } catch (err: any) {
-      const message = err.response?.data?.message || "Error in Login";
+      const message = err.response?.data?.detail || "Error in Login";
       set({ error: message });
       throw err;
     } finally {
@@ -57,7 +63,7 @@ export const useSessionStore = create<sessionStore>((set) => ({
         isAuthenticated: true,
       });
     } catch (err: any) {
-      const message = err.response?.data?.message || "Error in register";
+      const message = err.response?.data?.detail || "Error in register";
       set({ error: message });
       throw err;
     } finally {

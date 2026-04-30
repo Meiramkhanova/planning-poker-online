@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils/utils";
 import Logo from "@/shared/icons/PlanPoker";
 import { Eye } from "lucide-react";
 import PersonUI from "./components/PersonUI";

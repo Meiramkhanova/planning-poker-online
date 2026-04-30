@@ -1,4 +1,4 @@
-import type { CreateRoomResponse } from "@/features/create-room/types/types";
+import type { CreateRoomResponse } from "@/features/create-room/model/types";
 
 export interface Room {
   id: string;

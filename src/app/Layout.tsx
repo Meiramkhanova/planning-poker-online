@@ -1,7 +1,7 @@
 import Footer from "@/widgets/Footer";
 import Header from "@/widgets/Header";
 import { Outlet } from "react-router-dom";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/shared/ui/sonner";
 
 export const Layout = () => {
   return (

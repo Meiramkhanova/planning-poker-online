@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { loginSchema, type LoginFormValues } from "../model/loginSchema";
 import { useSessionStore } from "@/entities/session/model/store";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Field, FieldLabel } from "@/shared/ui/field";
+import { Input } from "@/shared/ui/input";
+import { Button } from "@/shared/ui/button";
+import { cn } from "@/shared/utils/utils";
 import { useShallow } from "zustand/react/shallow";
 
 export const LoginForm = () => {
@@ -29,8 +29,6 @@ export const LoginForm = () => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-      {error && <div className="text-red-500 text-center">{error}</div>}
-
       <Field>
         <FieldLabel className="text-gray-700">Email</FieldLabel>
         <Input
@@ -69,6 +67,8 @@ export const LoginForm = () => {
       <Button type="submit" disabled={isProcessing}>
         Sign In
       </Button>
+
+      {error && <div className="text-red-500 text-center">{error}</div>}
     </form>
   );
 };
