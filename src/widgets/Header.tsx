@@ -68,7 +68,7 @@ function Header() {
                     <DropdownMenuSeparator />
 
                     <DropdownMenuItem asChild className="cursor-pointer">
-                      <Link to="/dashboard">Profile</Link>
+                      <Link to="/dashboard">Dashboard</Link>
                     </DropdownMenuItem>
 
                     <DropdownMenuSeparator />

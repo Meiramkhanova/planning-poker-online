@@ -19,7 +19,7 @@ function RoomCard({ room }: { room: Room }) {
   const navigate = useNavigate();
 
   const handleOpenRoom = () => {
-    const targetPath = `/dashboard/room/${room.slug}`;
+    const targetPath = `/dashboard/room/${room.id}`;
     navigate(targetPath);
   };
 

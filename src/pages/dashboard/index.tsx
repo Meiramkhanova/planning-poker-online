@@ -16,7 +16,7 @@ function DashboardPage() {
     return (
       <div className="error-wrapper py-8 size-full flex items-center justify-center text-center">
         <Container>
-          <h2 className="text-sky-700 text-lg">Error loading rooms</h2>
+          <h2 className="text-sky-700 text-lg">Error loading rooms.</h2>
         </Container>
       </div>
     );

@@ -22,6 +22,10 @@ apiInstance.interceptors.response.use(
       localStorage.removeItem("accessToken");
     }
 
+    if (err.response?.status === 422) {
+      console.error("Error with validation:", err.response.data.detail);
+    }
+
     return Promise.reject(err);
   },
 );
