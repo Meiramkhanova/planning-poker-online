@@ -8,7 +8,7 @@ import {
   DropdownMenuTrigger,
 } from "@/shared/ui/dropdown-menu";
 import { useSessionStore } from "@/entities/session/model/store";
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/utils/cn";
 import Container from "@/shared/ui/Container";
 import TheLogo from "@/shared/ui/Logo";
 import { Link } from "react-router-dom";

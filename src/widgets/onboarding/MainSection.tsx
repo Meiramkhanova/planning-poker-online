@@ -1,4 +1,4 @@
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/utils/cn";
 import Container from "@/shared/ui/Container";
 import PokerUi from "./PokerUi";
 

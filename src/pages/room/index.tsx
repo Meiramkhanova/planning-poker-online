@@ -1,11 +1,10 @@
-import { Badge } from "@/pages/register/ui/badge";
 import { Button } from "@/shared/ui/button";
 import { useRoomById } from "@/entities/room/model/useRoomById";
-import { cn } from "@/shared/utils/utils";
 import Container from "@/shared/ui/Container";
 import LoadingElement from "@/shared/ui/LoadingElement";
-import CopyInvite from "@/widgets/room/CopyInvite";
 import { useParams } from "react-router-dom";
+import TopRoomInfo from "@/widgets/room/TopRoomInfo";
+import { cn } from "@/shared/utils/cn";
 
 function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
@@ -39,30 +38,12 @@ function RoomPage() {
   return (
     <Container className="size-full">
       <div className="py-8 xl:py-12 flex flex-col gap-8 h-full">
-        <section className="top-room-info flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="name-desc-card flex flex-col gap-4">
-            <div className="left-top-info flex items-center gap-4">
-              <div className="room-name">{roomData.name}</div>
-
-              <Badge
-                className={cn(
-                  roomData.status === "active"
-                    ? "bg-green-50 text-green-700 border-green-200"
-                    : "bg-gray-50 text-gray-500 border-gray-200",
-                )}>
-                {roomData.status}
-              </Badge>
-            </div>
-
-            <div className="desc text-gray-700 text-sm">
-              {roomData.description}
-            </div>
-          </div>
-
-          <div className="right-top-info">
-            <CopyInvite invite_link={roomData.invite_link} />
-          </div>
-        </section>
+        <TopRoomInfo
+          roomName={roomData.name}
+          status={roomData.status}
+          description={roomData.description}
+          invite_link={roomData.invite_link}
+        />
 
         <section className="active-task-players flex justify-center pt-20">
           <div

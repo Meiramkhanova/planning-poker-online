@@ -8,7 +8,7 @@ import {
   registerSchema,
   type RegisterFormValues,
 } from "../model/registerSchema";
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/utils/cn";
 import { useShallow } from "zustand/react/shallow";
 
 export const RegisterForm = () => {

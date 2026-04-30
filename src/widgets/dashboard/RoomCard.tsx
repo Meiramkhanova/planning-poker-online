@@ -9,7 +9,7 @@ import {
 } from "@/shared/ui/card";
 import { Separator } from "@/shared/ui/separator";
 import type { Room } from "@/entities/room/model/types";
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/utils/cn";
 import { formatRelativeTime } from "@/shared/utils/formatRelativeTime";
 import { MoveUpRight } from "lucide-react";
 import { useNavigate } from "react-router-dom";

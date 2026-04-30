@@ -1,4 +1,4 @@
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/utils/cn";
 
 function MiniCard({ order }: { order: number }) {
   return (

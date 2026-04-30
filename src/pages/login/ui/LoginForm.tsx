@@ -5,7 +5,7 @@ import { useSessionStore } from "@/entities/session/model/store";
 import { Field, FieldLabel } from "@/shared/ui/field";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
-import { cn } from "@/shared/utils/utils";
+import { cn } from "@/shared/utils/cn";
 import { useShallow } from "zustand/react/shallow";
 
 export const LoginForm = () => {
