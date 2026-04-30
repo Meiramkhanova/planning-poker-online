@@ -12,7 +12,7 @@ export interface Room {
   created_at: string;
 }
 
-export interface GetRoomResponse extends CreateRoomResponse {}
+export type GetRoomResponse = CreateRoomResponse;
 
 export interface FullRoom {
   id: string;

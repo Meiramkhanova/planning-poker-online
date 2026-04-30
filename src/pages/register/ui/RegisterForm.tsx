@@ -9,9 +9,20 @@ import {
   type RegisterFormValues,
 } from "../model/registerSchema";
 import { cn } from "@/lib/utils";
+import { useShallow } from "zustand/react/shallow";
 
 export const RegisterForm = () => {
-  const { register: signUp, isProcessing, error } = useSessionStore();
+  const {
+    register: signUp,
+    isProcessing,
+    error,
+  } = useSessionStore(
+    useShallow((s) => ({
+      register: s.register,
+      isProcessing: s.isProcessing,
+      error: s.error,
+    })),
+  );
 
   const {
     register,

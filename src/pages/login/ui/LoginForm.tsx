@@ -6,9 +6,16 @@ import { Field, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useShallow } from "zustand/react/shallow";
 
 export const LoginForm = () => {
-  const { login, isProcessing, error } = useSessionStore();
+  const { login, isProcessing, error } = useSessionStore(
+    useShallow((s) => ({
+      login: s.login,
+      isProcessing: s.isProcessing,
+      error: s.error,
+    })),
+  );
 
   const {
     register,
