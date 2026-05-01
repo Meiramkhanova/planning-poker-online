@@ -45,11 +45,11 @@ function RoomPage() {
           invite_link={roomData.invite_link}
         />
 
-        <section className="active-task-players flex justify-center pt-20">
+        <section className="active-task-players flex justify-center h-full items-center">
           <div
             className={cn(
-              "active-task xl:w-1/5 bg-sky-600 min-h-32 rounded-full text-center",
-              "flex items-center justify-center text-white p-4",
+              "active-task xl:min-w-1/5 bg-sky-600 h-fit rounded-full text-center",
+              "flex items-center justify-center text-white p-8",
             )}>
             {roomData.current_task_id ? (
               <div>current_task_title will be</div>

@@ -1,6 +1,6 @@
 import type { SVGAttributes } from "react";
 
-function Logo({ className, ...props }: SVGAttributes<SVGSVGElement>) {
+function LogoIcon({ className, ...props }: SVGAttributes<SVGSVGElement>) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,4 +21,4 @@ function Logo({ className, ...props }: SVGAttributes<SVGSVGElement>) {
   );
 }
 
-export default Logo;
+export default LogoIcon;

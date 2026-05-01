@@ -10,8 +10,8 @@ import {
 import { useSessionStore } from "@/entities/session/model/store";
 import { cn } from "@/shared/utils/cn";
 import Container from "@/shared/ui/Container";
-import TheLogo from "@/shared/ui/Logo";
 import { Link } from "react-router-dom";
+import Logo from "@/shared/ui/Logo";
 
 function Header() {
   const { isAuthenticated, user, logout } = useSessionStore();
@@ -23,7 +23,7 @@ function Header() {
       <div className="header-outer-wrapper bg-white border-b border-gray-100 h-16 flex items-center">
         <Container>
           <div className="header-wrapper flex items-center justify-between">
-            <TheLogo />
+            <Logo />
 
             <div className="auth-btns flex items-center gap-5">
               {!isAuthenticated ? (
