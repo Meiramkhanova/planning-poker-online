@@ -40,6 +40,12 @@ function RoomPage() {
   const selfParticipant = participants.find((p) => p.id === selfId);
   const selfSeatIndex = selfParticipant?.seat_index ?? 0;
 
+  const tasks = data.tasks;
+
+  const sortedTasks = [...tasks].sort((a, b) => a.position - b.position);
+
+  const isOwner = participants.find((p) => p.id === selfId)?.role === "owner";
+
   return (
     <Container className="size-full">
       <div className="py-8 flex flex-col gap-8 h-full">
@@ -48,7 +54,8 @@ function RoomPage() {
           status={roomData.status}
           description={roomData.description}
           invite_link={roomData.invite_link}
-          tasks={data.tasks}
+          sortedTasks={sortedTasks}
+          isOwner={isOwner}
         />
 
         <section
@@ -105,8 +112,8 @@ function RoomPage() {
 
                 <span
                   className={cn(
-                    "text-[10px] font-bold bg-white/80 px-2 py-0.5",
-                    "rounded-full text-slate-800 shadow-sm whitespace-nowrap",
+                    "text-[10px] font-bold bg-white/80 px-2 py-0.5 mt-0.5",
+                    "rounded text-slate-800 border border-gray-100 whitespace-nowrap",
                   )}>
                   {p.name} {p.id === selfId ? "(You)" : ""}
                 </span>

@@ -9,9 +9,15 @@ import {
   SheetTrigger,
 } from "@/shared/ui/sheet";
 import { cn } from "@/shared/utils/cn";
-import { Ellipsis, PanelRight } from "lucide-react";
+import { Ellipsis, PanelRight, Plus } from "lucide-react";
 
-function BacklogInfo({ tasks }: { tasks: Task[] }) {
+function BacklogInfo({
+  sortedTasks,
+  isOwner,
+}: {
+  sortedTasks: Task[];
+  isOwner: boolean;
+}) {
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -29,9 +35,16 @@ function BacklogInfo({ tasks }: { tasks: Task[] }) {
           <SheetDescription className="text-gray-500">
             Tasks for the current planning session.
           </SheetDescription>
+
+          {isOwner && (
+            <Button className="mt-4 font-normal">
+              <Plus />
+              Create Task
+            </Button>
+          )}
         </SheetHeader>
 
-        {tasks.length === 0 ? (
+        {sortedTasks.length === 0 ? (
           <div
             className={cn(
               "empty-rooms flex flex-col items-center justify-center text-center h-full",
@@ -40,12 +53,18 @@ function BacklogInfo({ tasks }: { tasks: Task[] }) {
             <p className="text-gray-600">No tasks yet. Create one!</p>
           </div>
         ) : (
-          <div className="flex flex-col gap-3 overflow-y-auto mx-4 mb-4 h-full">
-            {tasks.map((task) => (
+          <div
+            className={cn(
+              "flex flex-col gap-3 overflow-y-auto mx-4 mb-4 h-full pr-2",
+              "[&::-webkit-scrollbar]:w-1",
+              "[&::-webkit-scrollbar-thumb]:bg-gray-300",
+              "[&::-webkit-scrollbar-thumb]:rounded-full",
+            )}>
+            {sortedTasks.map((task) => (
               <div
                 key={task.id}
                 className={cn(
-                  "relative group flex flex-col gap-4 p-4 border rounded-md cursor-pointer",
+                  "task-card relative group p-4 pt-2 border rounded-md cursor-pointer",
                   "bg-white shadow-sm hover:border-sky-700/50 transition-all duration-300",
                 )}>
                 <div className="flex justify-between items-center">
@@ -71,12 +90,12 @@ function BacklogInfo({ tasks }: { tasks: Task[] }) {
                 </h4>
 
                 {task.description && (
-                  <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed">
+                  <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed pt-4">
                     {task.description}
                   </p>
                 )}
 
-                <div className="flex items-center justify-between">
+                <div className="flex items-center justify-between pt-4">
                   <div className="flex items-center gap-1.5">
                     <div className="size-1.5 rounded-full bg-slate-300" />
 
