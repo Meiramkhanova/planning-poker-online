@@ -41,7 +41,18 @@ export const useSessionStore = create<sessionStore>((set) => ({
         isAuthenticated: true,
       });
     } catch (err: any) {
-      const message = err.response?.data?.detail || "Error in Login";
+      const detail = err.response?.data?.detail;
+
+      let message = "Error in Login";
+
+      if (typeof detail === "string") {
+        message = detail;
+      } else if (Array.isArray(detail)) {
+        message = detail.map((d) => d.msg).join(", ");
+      } else if (detail?.message) {
+        message = detail.message;
+      }
+
       set({ error: message });
       throw err;
     } finally {
@@ -63,7 +74,18 @@ export const useSessionStore = create<sessionStore>((set) => ({
         isAuthenticated: true,
       });
     } catch (err: any) {
-      const message = err.response?.data?.detail || "Error in register";
+      const detail = err.response?.data?.detail;
+
+      let message = "Error in Login";
+
+      if (typeof detail === "string") {
+        message = detail;
+      } else if (Array.isArray(detail)) {
+        message = detail.map((d) => d.msg).join(", ");
+      } else if (detail?.message) {
+        message = detail.message;
+      }
+
       set({ error: message });
       throw err;
     } finally {

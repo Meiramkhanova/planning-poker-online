@@ -11,7 +11,7 @@ import {
 function Participants() {
   return (
     <Sheet>
-      <SheetTrigger asChild>
+      <SheetTrigger asChild className="col-span-2 md:col-span-1">
         <Button>Participants</Button>
       </SheetTrigger>
 

@@ -68,6 +68,12 @@ function Header() {
                     <DropdownMenuSeparator />
 
                     <DropdownMenuItem asChild className="cursor-pointer">
+                      <Link to="/">Main</Link>
+                    </DropdownMenuItem>
+
+                    <DropdownMenuSeparator />
+
+                    <DropdownMenuItem asChild className="cursor-pointer">
                       <Link to="/dashboard">Dashboard</Link>
                     </DropdownMenuItem>
 

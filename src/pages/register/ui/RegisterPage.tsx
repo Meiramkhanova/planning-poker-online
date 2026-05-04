@@ -5,7 +5,7 @@ import Container from "@/shared/ui/Container";
 
 const RegisterPage = () => {
   return (
-    <div className="wrapper h-full flex items-center py-8 xl:py-12">
+    <div className="wrapper h-full flex items-center py-8">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:items-center">
           <PlanPoker />

@@ -7,12 +7,17 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/shared/ui/sheet";
+import { PanelRight } from "lucide-react";
 
 function BacklogInfo() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button>📋 Backlog</Button>
+        <Button>
+          <PanelRight />
+
+          <span>Backlog</span>
+        </Button>
       </SheetTrigger>
 
       <SheetContent side="right">

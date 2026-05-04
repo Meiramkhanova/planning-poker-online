@@ -9,7 +9,7 @@ function HowWorks() {
           <div className="headlines flex flex-col gap-8">
             <h5 className="text-sky-800 uppercase text-sm">how it works</h5>
 
-            <h3 className="text-gray-700 text-6xl">Four steps to consensus</h3>
+            <h3 className="text-gray-700 text-5xl">Four steps to consensus</h3>
           </div>
 
           <div className="info-cards grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-8">

@@ -24,7 +24,7 @@ function DashboardPage() {
 
   return (
     <Container className="size-full">
-      <div className="rooms-wrapper py-8 xl:py-12 flex flex-col gap-8 h-full">
+      <div className="rooms-wrapper py-8 flex flex-col gap-8 h-full">
         <div className="rooms-header flex flex-col sm:flex-row sm:items-center sm:justify-between gap-8">
           <div>
             <h1 className="text-xl text-sky-700 font-medium">My Rooms</h1>

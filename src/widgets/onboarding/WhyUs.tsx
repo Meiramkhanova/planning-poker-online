@@ -52,11 +52,11 @@ function WhyUs() {
   return (
     <section className="why-planning-poker">
       <Container>
-        <div className="wrapper py-8 xl:py-12 flex flex-col gap-12">
+        <div className="wrapper py-8 flex flex-col gap-12">
           <div className="headlines flex flex-col gap-8">
             <h5 className="text-sky-800 uppercase text-sm">Why plan poker</h5>
 
-            <h3 className="text-gray-700 text-6xl">Estimation Accuracy</h3>
+            <h3 className="text-gray-700 text-5xl">Estimation Accuracy</h3>
           </div>
 
           <div className="reason-cards grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
