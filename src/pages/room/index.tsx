@@ -48,12 +48,13 @@ function RoomPage() {
           status={roomData.status}
           description={roomData.description}
           invite_link={roomData.invite_link}
+          tasks={data.tasks}
         />
 
         <section
           className="relative active-task-players flex justify-center h-full items-center overflow-hidden"
           style={{
-            fontSize: "min(5vw, 8px)",
+            fontSize: "min(5vw, 16px)",
             // minHeight: "300px",
             // width: "100%",
           }}>
@@ -88,17 +89,25 @@ function RoomPage() {
                   transform: "translate(-50%, -50%)",
                 }}>
                 <div
-                  className="rounded-[0.5em] border-[0.15em] flex items-center justify-center text-white font-semibold"
+                  className={cn(
+                    "flex items-center justify-center",
+                    "text-white font-semibold rounded",
+                    p.id === selfId && "ring-3 ring-sky-200",
+                  )}
                   style={{
-                    width: "3.5em",
-                    height: "5em",
+                    width: "3em",
+                    height: "4em",
                     backgroundColor: p.avatar_color,
-                    fontSize: "1.2em",
+                    fontSize: "0.8em",
                   }}>
                   {p.has_voted ? "✓" : "?"}
                 </div>
 
-                <span className="text-[10px] font-bold bg-white/80 px-2 py-0.5 rounded-full text-slate-800 shadow-sm whitespace-nowrap">
+                <span
+                  className={cn(
+                    "text-[10px] font-bold bg-white/80 px-2 py-0.5",
+                    "rounded-full text-slate-800 shadow-sm whitespace-nowrap",
+                  )}>
                   {p.name} {p.id === selfId ? "(You)" : ""}
                 </span>
               </div>

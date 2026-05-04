@@ -1,16 +1,15 @@
 import CopyInvite from "@/features/invite-players/ui/CopyInvite";
 import { Badge } from "@/shared/ui/badge";
-import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/utils/cn";
-import { MoveLeft } from "lucide-react";
-import { Link } from "react-router-dom";
 import BacklogInfo from "./BacklogInfo";
+import type { Task } from "@/entities/task/model/types";
 
 interface TopRoomInfoProps {
   roomName: string;
   status: string;
   description: string;
   invite_link: string;
+  tasks: Task[];
 }
 
 function TopRoomInfo({
@@ -18,6 +17,7 @@ function TopRoomInfo({
   status,
   description,
   invite_link,
+  tasks,
 }: TopRoomInfoProps) {
   return (
     <section className="top-room-info flex flex-col gap-4 sm:gap-8 sm:flex-row sm:items-center sm:justify-between">
@@ -41,7 +41,7 @@ function TopRoomInfo({
       <div className="right-top-info flex flex-col gap-4 sm:flex-row">
         <CopyInvite invite_link={invite_link} />
 
-        <BacklogInfo />
+        <BacklogInfo tasks={tasks} />
 
         {/* <Participants /> */}
       </div>
