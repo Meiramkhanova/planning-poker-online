@@ -84,12 +84,14 @@ function CreateRoom() {
             render={({ field, fieldState }) => (
               <Field>
                 <Label htmlFor={field.name}>Room Name</Label>
+
                 <Input
                   {...field}
                   id={field.name}
                   aria-invalid={fieldState.invalid}
                   placeholder="Enter the room name"
                 />
+
                 {fieldState.error && (
                   <FieldError>{fieldState.error.message}</FieldError>
                 )}
@@ -103,6 +105,7 @@ function CreateRoom() {
             render={({ field, fieldState }) => (
               <Field>
                 <Label htmlFor={field.name}>Description (Optional)</Label>
+
                 <Input
                   {...field}
                   id={field.name}
@@ -121,6 +124,7 @@ function CreateRoom() {
             render={({ field, fieldState }) => (
               <Field>
                 <Label>Deck Preset</Label>
+
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}>

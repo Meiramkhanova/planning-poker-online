@@ -56,6 +56,7 @@ function RoomPage() {
           invite_link={roomData.invite_link}
           sortedTasks={sortedTasks}
           isOwner={isOwner}
+          roomId={roomId ?? ""}
         />
 
         <section
@@ -129,7 +130,11 @@ function RoomPage() {
 
           <div className="voting-card min-w-1/2 max-w-[80%] flex flex-wrap items-center gap-4 md:gap-8 justify-center">
             {roomData?.deck.cards.map((card) => (
-              <Button size="sm" variant="outline" key={card}>
+              <Button
+                size="sm"
+                className="rounded"
+                variant="outline"
+                key={card}>
                 {card}
               </Button>
             ))}

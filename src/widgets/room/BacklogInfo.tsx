@@ -4,22 +4,67 @@ import {
   Sheet,
   SheetContent,
   SheetDescription,
+  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@/shared/ui/sheet";
 import { cn } from "@/shared/utils/cn";
-import { Ellipsis, PanelRight, Plus } from "lucide-react";
+import { PanelRight, Plus } from "lucide-react";
+import { useState } from "react";
+import TaskCard from "./components/TaskCard";
+import { useCreateTask } from "@/features/create-task/model/useCreateTask";
+import { useForm } from "react-hook-form";
+import {
+  createTaskSchema,
+  type CreateTaskFormValues,
+} from "@/features/create-task/model/schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Field, FieldLabel } from "@/shared/ui/field";
+import { Input } from "@/shared/ui/input";
+import { Textarea } from "@/shared/ui/textarea";
 
-function BacklogInfo({
-  sortedTasks,
-  isOwner,
-}: {
+interface BacklogInfoProps {
   sortedTasks: Task[];
   isOwner: boolean;
-}) {
+  roomId: string;
+}
+
+function BacklogInfo({ sortedTasks, isOwner, roomId }: BacklogInfoProps) {
+  const [isCreating, setIsCreating] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+
+  const { mutate: createTask, isPending } = useCreateTask(roomId);
+
+  const { register, reset, handleSubmit } = useForm<CreateTaskFormValues>({
+    resolver: zodResolver(createTaskSchema),
+    defaultValues: { title: "", description: "", position: sortedTasks.length },
+  });
+
+  const handleSheetChange = (open: boolean) => {
+    setIsSheetOpen(open);
+
+    if (!open) {
+      setIsCreating(false);
+      reset();
+    }
+  };
+
+  const onSubmit = (data: CreateTaskFormValues) => {
+    createTask(data, {
+      onSuccess: () => {
+        setIsCreating(false);
+        reset();
+      },
+    });
+  };
+
+  const handleCreatingTask = () => {
+    setIsCreating(true);
+  };
+
   return (
-    <Sheet>
+    <Sheet open={isSheetOpen} onOpenChange={handleSheetChange}>
       <SheetTrigger asChild>
         <Button>
           <PanelRight />
@@ -35,13 +80,6 @@ function BacklogInfo({
           <SheetDescription className="text-gray-500">
             Tasks for the current planning session.
           </SheetDescription>
-
-          {isOwner && (
-            <Button className="mt-4 font-normal">
-              <Plus />
-              Create Task
-            </Button>
-          )}
         </SheetHeader>
 
         {sortedTasks.length === 0 ? (
@@ -55,63 +93,76 @@ function BacklogInfo({
         ) : (
           <div
             className={cn(
-              "flex flex-col gap-3 overflow-y-auto mx-4 mb-4 h-full pr-2",
+              "flex flex-col gap-4 overflow-y-auto mx-4 mb-4 h-full pr-2",
               "[&::-webkit-scrollbar]:w-1",
               "[&::-webkit-scrollbar-thumb]:bg-gray-300",
               "[&::-webkit-scrollbar-thumb]:rounded-full",
             )}>
             {sortedTasks.map((task) => (
-              <div
-                key={task.id}
-                className={cn(
-                  "task-card relative group p-4 pt-2 border rounded-md cursor-pointer",
-                  "bg-white shadow-sm hover:border-sky-700/50 transition-all duration-300",
-                )}>
-                <div className="flex justify-between items-center">
-                  <span
-                    className={cn(
-                      "text-[9px] uppercase px-2 rounded",
-                      "tracking-wider font-semibold text-sky-700 bg-sky-50",
-                    )}>
-                    {task.status}
-                  </span>
-
-                  <div
-                    className={cn(
-                      "size-10 rounded-full hover:bg-gray-100 flex items-center justify-center",
-                      "transition-all duration-300",
-                    )}>
-                    <Ellipsis className="size-5 text-gray-600" />
-                  </div>
-                </div>
-
-                <h4 className="font-semibold text-gray-700 text-sm leading-none">
-                  {task.title}
-                </h4>
-
-                {task.description && (
-                  <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed pt-4">
-                    {task.description}
-                  </p>
-                )}
-
-                <div className="flex items-center justify-between pt-4">
-                  <div className="flex items-center gap-1.5">
-                    <div className="size-1.5 rounded-full bg-slate-300" />
-
-                    <span className="text-[10px] text-gray-400 italic">
-                      {task.estimate_value ?? "Not estimated"}
-                    </span>
-                  </div>
-
-                  <span className="text-[10px] text-gray-400">
-                    {new Date(task.created_at).toLocaleDateString()}
-                  </span>
-                </div>
-              </div>
+              <TaskCard key={task.id} task={task} />
             ))}
           </div>
         )}
+
+        <SheetFooter className="pt-0 border-t border-gray-100">
+          {isCreating ? (
+            <form
+              onSubmit={handleSubmit(onSubmit)}
+              className="flex flex-col gap-2 pt-4 animate-in fade-in slide-in-from-bottom-2 duration-300">
+              <div className="inputs flex flex-col gap-2">
+                <Field>
+                  <FieldLabel htmlFor="task-title" className="text-gray-700">
+                    Name
+                  </FieldLabel>
+
+                  <Input
+                    id="task-title"
+                    {...register("title")}
+                    type="text"
+                    placeholder="What needs to be done?"
+                    autoFocus
+                  />
+                </Field>
+
+                <Field>
+                  <FieldLabel htmlFor="task-desc">
+                    Description (Optional)
+                  </FieldLabel>
+
+                  <Textarea
+                    id="task-desc"
+                    {...register("description")}
+                    placeholder="Add more details..."
+                  />
+                </Field>
+
+                <div className="btns flex items-center gap-4">
+                  <Button type="submit" disabled={isPending} className="flex-1">
+                    {isPending ? "Creating..." : "Add Task"}
+                  </Button>
+
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => {
+                      setIsCreating(false);
+                      reset();
+                    }}
+                    className="flex-1">
+                    Cancel
+                  </Button>
+                </div>
+              </div>
+            </form>
+          ) : (
+            isOwner && (
+              <Button onClick={handleCreatingTask} className="mt-4">
+                <Plus />
+                Create Task
+              </Button>
+            )
+          )}
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

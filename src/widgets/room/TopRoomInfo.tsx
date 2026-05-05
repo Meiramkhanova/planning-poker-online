@@ -11,6 +11,7 @@ interface TopRoomInfoProps {
   invite_link: string;
   sortedTasks: Task[];
   isOwner: boolean;
+  roomId: string;
 }
 
 function TopRoomInfo({
@@ -20,6 +21,7 @@ function TopRoomInfo({
   invite_link,
   sortedTasks,
   isOwner,
+  roomId,
 }: TopRoomInfoProps) {
   return (
     <section className="top-room-info flex flex-col gap-4 sm:gap-8 sm:flex-row sm:items-center sm:justify-between">
@@ -43,9 +45,11 @@ function TopRoomInfo({
       <div className="right-top-info flex flex-col gap-4 sm:flex-row">
         <CopyInvite invite_link={invite_link} />
 
-        <BacklogInfo sortedTasks={sortedTasks} isOwner={isOwner} />
-
-        {/* <Participants /> */}
+        <BacklogInfo
+          sortedTasks={sortedTasks}
+          isOwner={isOwner}
+          roomId={roomId}
+        />
       </div>
     </section>
   );

@@ -30,8 +30,12 @@ export const LoginForm = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
       <Field>
-        <FieldLabel className="text-gray-700">Email</FieldLabel>
+        <FieldLabel htmlFor="login-email" className="text-gray-700">
+          Email
+        </FieldLabel>
+
         <Input
+          id="login-email"
           {...register("email")}
           className={cn(
             "py-5 rounded",
@@ -46,8 +50,11 @@ export const LoginForm = () => {
       </Field>
 
       <Field>
-        <FieldLabel className="text-gray-700">Password</FieldLabel>
+        <FieldLabel htmlFor="login-password" className="text-gray-700">
+          Password
+        </FieldLabel>
         <Input
+          id="login-password"
           type="password"
           {...register("password")}
           className={cn(
