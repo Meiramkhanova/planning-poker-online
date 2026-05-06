@@ -1,16 +1,13 @@
 import type { Task } from "@/entities/task/model/types";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/shared/ui/dropdown-menu";
-import { Separator } from "@/shared/ui/separator";
-import { cn } from "@/shared/utils/cn";
-import { Ellipsis, Pencil, Trash2 } from "lucide-react";
 
-function TaskCard({ task }: { task: Task }) {
+import { cn } from "@/shared/utils/cn";
+
+interface TaskCardProps {
+  task: Task;
+  actionsToRender?: React.ReactNode;
+}
+
+function TaskCard({ task, actionsToRender }: TaskCardProps) {
   return (
     <div
       className={cn(
@@ -26,33 +23,7 @@ function TaskCard({ task }: { task: Task }) {
           {task.status}
         </span>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <div
-              className={cn(
-                "size-10 rounded-full hover:bg-gray-100 flex items-center justify-center",
-                "transition-all duration-300",
-              )}>
-              <Ellipsis className="size-5 text-gray-600" />
-            </div>
-          </DropdownMenuTrigger>
-
-          <DropdownMenuContent align="end">
-            <DropdownMenuItem className="gap-2 cursor-pointer">
-              <Pencil className="size-4" />
-
-              <span>Edit</span>
-            </DropdownMenuItem>
-
-            <DropdownMenuSeparator />
-
-            <DropdownMenuItem className="gap-2 text-red-600 focus:text-red-600 cursor-pointer">
-              <Trash2 className="size-4" />
-
-              <span>Delete</span>
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {actionsToRender}
       </div>
 
       <h4 className="font-semibold text-gray-700 text-sm leading-none">

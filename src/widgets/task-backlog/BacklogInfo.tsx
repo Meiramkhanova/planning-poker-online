@@ -12,7 +12,6 @@ import {
 import { cn } from "@/shared/utils/cn";
 import { PanelRight, Plus } from "lucide-react";
 import { useState } from "react";
-import TaskCard from "./components/TaskCard";
 import { useCreateTask } from "@/features/create-task/model/useCreateTask";
 import { useForm } from "react-hook-form";
 import {
@@ -23,6 +22,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Field, FieldLabel } from "@/shared/ui/field";
 import { Input } from "@/shared/ui/input";
 import { Textarea } from "@/shared/ui/textarea";
+import TaskCardWithActions from "./TaskCardWithActions";
 
 interface BacklogInfoProps {
   sortedTasks: Task[];
@@ -104,7 +104,7 @@ function BacklogInfo({ sortedTasks, isOwner, roomId }: BacklogInfoProps) {
               "[&::-webkit-scrollbar-thumb]:rounded-full",
             )}>
             {sortedTasks.map((task) => (
-              <TaskCard key={task.id} task={task} />
+              <TaskCardWithActions key={task.id} task={task} />
             ))}
           </div>
         )}

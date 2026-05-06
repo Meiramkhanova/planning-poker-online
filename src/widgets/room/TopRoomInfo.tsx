@@ -1,8 +1,8 @@
 import CopyInvite from "@/features/invite-players/ui/CopyInvite";
 import { Badge } from "@/shared/ui/badge";
 import { cn } from "@/shared/utils/cn";
-import BacklogInfo from "./BacklogInfo";
 import type { Task } from "@/entities/task/model/types";
+import BacklogInfo from "../task-backlog/BacklogInfo";
 
 interface TopRoomInfoProps {
   roomName: string;
