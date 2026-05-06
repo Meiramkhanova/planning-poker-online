@@ -1,1 +1,1 @@
-export { DeleteTaskAction } from "./ui/DeleteTaskAction";
+export { DeleteTask } from "./ui/DeleteTask";

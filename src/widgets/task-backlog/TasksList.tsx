@@ -9,7 +9,7 @@ import {
 } from "@/shared/ui/dropdown-menu";
 import { Ellipsis } from "lucide-react";
 import { EditTaskAction } from "@/features/edit-task";
-import { DeleteTaskAction } from "@/features/delete-task";
+import { DeleteTask } from "@/features/delete-task";
 
 function TasksList({ tasks }: { tasks: Task[] }) {
   const sortedTasks = [...tasks].sort((a, b) => a.position - b.position);
@@ -43,7 +43,7 @@ function TasksList({ tasks }: { tasks: Task[] }) {
 
                 <DropdownMenuSeparator />
 
-                <DeleteTaskAction id={task.id} />
+                <DeleteTask taskId={task.id} />
               </DropdownMenuContent>
             </DropdownMenu>
           }
