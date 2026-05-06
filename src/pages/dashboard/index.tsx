@@ -2,11 +2,11 @@ import { useRooms } from "@/entities/room/model/useRooms";
 import Container from "@/shared/ui/Container";
 import LoadingElement from "@/shared/ui/LoadingElement";
 import CreateRoom from "@/widgets/dashboard/CreateRoom";
-import EmptyRooms from "@/widgets/dashboard/EmptyRooms";
-import RoomCard from "@/widgets/dashboard/RoomCard";
+import EmptyRooms from "@/entities/room/ui/EmptyRooms";
+import RoomCardList from "@/widgets/room/RoomCardList";
 
 function DashboardPage() {
-  const { data: rooms, isLoading, isError } = useRooms();
+  const { data: rooms = [], isLoading, isError } = useRooms();
 
   if (isLoading) {
     return <LoadingElement />;
@@ -34,15 +34,7 @@ function DashboardPage() {
           <CreateRoom />
         </div>
 
-        {rooms?.length === 0 ? (
-          <EmptyRooms />
-        ) : (
-          <div className="rooms grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {rooms?.map((room) => (
-              <RoomCard room={room} key={room.id} />
-            ))}
-          </div>
-        )}
+        {rooms?.length === 0 ? <EmptyRooms /> : <RoomCardList rooms={rooms} />}
       </div>
     </Container>
   );

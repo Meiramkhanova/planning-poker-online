@@ -40,10 +40,6 @@ function RoomPage() {
   const selfParticipant = participants.find((p) => p.id === selfId);
   const selfSeatIndex = selfParticipant?.seat_index ?? 0;
 
-  const tasks = data.tasks;
-
-  const sortedTasks = [...tasks].sort((a, b) => a.position - b.position);
-
   const isOwner = participants.find((p) => p.id === selfId)?.role === "owner";
 
   return (
@@ -53,8 +49,8 @@ function RoomPage() {
           roomName={roomData.name}
           status={roomData.status}
           description={roomData.description}
-          invite_link={roomData.invite_link}
-          sortedTasks={sortedTasks}
+          inviteLink={roomData.invite_link}
+          tasks={data?.tasks}
           isOwner={isOwner}
           roomId={roomId ?? ""}
         />
@@ -63,8 +59,6 @@ function RoomPage() {
           className="relative active-task-players flex justify-center h-full items-center overflow-hidden"
           style={{
             fontSize: "min(5vw, 16px)",
-            // minHeight: "300px",
-            // width: "100%",
           }}>
           <div
             className={cn(

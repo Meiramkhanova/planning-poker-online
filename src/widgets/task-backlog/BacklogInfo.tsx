@@ -22,15 +22,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Field, FieldLabel } from "@/shared/ui/field";
 import { Input } from "@/shared/ui/input";
 import { Textarea } from "@/shared/ui/textarea";
-import TaskCardWithActions from "./TaskCardWithActions";
+import EmptyTask from "@/entities/task/ui/EmptyTask";
+import TasksList from "./TasksList";
 
 interface BacklogInfoProps {
-  sortedTasks: Task[];
+  tasks: Task[];
   isOwner: boolean;
   roomId: string;
 }
 
-function BacklogInfo({ sortedTasks, isOwner, roomId }: BacklogInfoProps) {
+function BacklogInfo({ tasks, isOwner, roomId }: BacklogInfoProps) {
   const [isCreating, setIsCreating] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
@@ -43,7 +44,7 @@ function BacklogInfo({ sortedTasks, isOwner, roomId }: BacklogInfoProps) {
     formState: { errors },
   } = useForm<CreateTaskFormValues>({
     resolver: zodResolver(createTaskSchema),
-    defaultValues: { title: "", description: "", position: sortedTasks.length },
+    defaultValues: { title: "", description: "", position: tasks.length },
   });
 
   const handleSheetChange = (open: boolean) => {
@@ -87,27 +88,7 @@ function BacklogInfo({ sortedTasks, isOwner, roomId }: BacklogInfoProps) {
           </SheetDescription>
         </SheetHeader>
 
-        {sortedTasks.length === 0 ? (
-          <div
-            className={cn(
-              "empty-rooms flex flex-col items-center justify-center text-center h-full",
-              "border-2 border-dashed rounded-2xl bg-gray-50/50 mx-4 mb-4 p-4",
-            )}>
-            <p className="text-gray-600">No tasks yet. Create one!</p>
-          </div>
-        ) : (
-          <div
-            className={cn(
-              "flex flex-col gap-4 overflow-y-auto mx-4 mb-4 h-full pr-2",
-              "[&::-webkit-scrollbar]:w-1",
-              "[&::-webkit-scrollbar-thumb]:bg-gray-300",
-              "[&::-webkit-scrollbar-thumb]:rounded-full",
-            )}>
-            {sortedTasks.map((task) => (
-              <TaskCardWithActions key={task.id} task={task} />
-            ))}
-          </div>
-        )}
+        {tasks.length === 0 ? <EmptyTask /> : <TasksList tasks={tasks} />}
 
         <SheetFooter className="pt-0 border-t border-gray-100">
           {isCreating ? (

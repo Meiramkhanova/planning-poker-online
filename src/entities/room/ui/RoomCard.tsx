@@ -1,4 +1,3 @@
-import { Button } from "@/shared/ui/button";
 import {
   Card,
   CardContent,
@@ -11,34 +10,13 @@ import { Separator } from "@/shared/ui/separator";
 import type { Room } from "@/entities/room/model/types";
 import { cn } from "@/shared/utils/cn";
 import { formatRelativeTime } from "@/shared/utils/formatRelativeTime";
-import { MoveUpRight } from "lucide-react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 
-function RoomCard({ room }: { room: Room }) {
-  const navigate = useNavigate();
+interface RoomCardProps {
+  room: Room;
+  actions: React.ReactNode;
+}
 
-  const handleOpenRoom = () => {
-    const targetPath = `/dashboard/room/${room.id}`;
-    navigate(targetPath);
-  };
-
-  const handleCopyInvite = async () => {
-    const links = room.invite_link.split(",");
-
-    const inviteUrl =
-      links.find((link) => link.includes("http://localhost:5173")) || links[0];
-
-    try {
-      await navigator.clipboard.writeText(inviteUrl);
-
-      toast.success("Link copied to clipboard");
-    } catch (err) {
-      toast.error("Failed to copy link");
-      console.log("err", err);
-    }
-  };
-
+function RoomCard({ room, actions }: RoomCardProps) {
   return (
     <Card>
       <CardHeader>
@@ -59,12 +37,6 @@ function RoomCard({ room }: { room: Room }) {
                 <p className="text-xs text-gray-500 text-wrap">{room.id}</p>
               </div>
             </div>
-
-            {/* {room?.active_task_title ? (
-              <Badge>{room?.active_task_title}</Badge>
-            ) : (
-              <Badge variant="outline">Idle</Badge>
-            )} */}
           </div>
         </CardTitle>
 
@@ -115,20 +87,7 @@ function RoomCard({ room }: { room: Room }) {
         </div>
       </CardContent>
 
-      <CardFooter className="mt-auto">
-        <div className="btns grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
-          <Button onClick={handleCopyInvite}>Copy Invite</Button>
-
-          <Button
-            onClick={handleOpenRoom}
-            className="border border-gray-200"
-            variant="outline">
-            <span>Open</span>
-
-            <MoveUpRight className="size-3.5" />
-          </Button>
-        </div>
-      </CardFooter>
+      <CardFooter className="mt-auto">{actions}</CardFooter>
     </Card>
   );
 }

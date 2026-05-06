@@ -1,15 +1,15 @@
-import CopyInvite from "@/features/invite-players/ui/CopyInvite";
 import { Badge } from "@/shared/ui/badge";
 import { cn } from "@/shared/utils/cn";
 import type { Task } from "@/entities/task/model/types";
 import BacklogInfo from "../task-backlog/BacklogInfo";
+import { CopyInviteDialog } from "@/features/invite-players";
 
 interface TopRoomInfoProps {
   roomName: string;
   status: string;
   description: string;
-  invite_link: string;
-  sortedTasks: Task[];
+  inviteLink: string;
+  tasks: Task[];
   isOwner: boolean;
   roomId: string;
 }
@@ -18,8 +18,8 @@ function TopRoomInfo({
   roomName,
   status,
   description,
-  invite_link,
-  sortedTasks,
+  inviteLink,
+  tasks,
   isOwner,
   roomId,
 }: TopRoomInfoProps) {
@@ -43,13 +43,9 @@ function TopRoomInfo({
       </div>
 
       <div className="right-top-info flex flex-col gap-4 sm:flex-row">
-        <CopyInvite invite_link={invite_link} />
+        <CopyInviteDialog inviteLink={inviteLink} />
 
-        <BacklogInfo
-          sortedTasks={sortedTasks}
-          isOwner={isOwner}
-          roomId={roomId}
-        />
+        <BacklogInfo tasks={tasks} isOwner={isOwner} roomId={roomId} />
       </div>
     </section>
   );

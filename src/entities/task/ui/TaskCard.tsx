@@ -4,7 +4,7 @@ import { cn } from "@/shared/utils/cn";
 
 interface TaskCardProps {
   task: Task;
-  actionsToRender?: React.ReactNode;
+  actionsToRender: React.ReactNode;
 }
 
 function TaskCard({ task, actionsToRender }: TaskCardProps) {

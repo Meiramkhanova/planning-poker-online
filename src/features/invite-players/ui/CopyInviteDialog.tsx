@@ -9,27 +9,18 @@ import {
 } from "@/shared/ui/dialog";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
+import { copyToClipboard } from "@/shared/utils/copyToClipboard";
+import { getInviteUrl } from "@/shared/utils/getInviteUrl";
 import { useState } from "react";
-import { toast } from "sonner";
 
-function CopyInvite({ invite_link }: { invite_link: string }) {
+export const CopyInviteDialog = ({ inviteLink }: { inviteLink: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const links = invite_link.split(",");
-  const inviteUrl =
-    links.find((link) => link.includes("http://localhost:5173")) || links[0];
+  const url = getInviteUrl(inviteLink);
 
-  const handleCopyInvite = async () => {
-    try {
-      await navigator.clipboard.writeText(inviteUrl);
-
-      toast.success("Link copied to clipboard");
-
-      setIsOpen(false);
-    } catch (err) {
-      toast.error("Failed to copy link");
-      console.error("err", err);
-    }
+  const handleCopy = async () => {
+    const success = await copyToClipboard(url);
+    if (success) setIsOpen(false);
   };
 
   return (
@@ -54,13 +45,11 @@ function CopyInvite({ invite_link }: { invite_link: string }) {
             Ссылка
           </Label>
 
-          <Input id="link" defaultValue={inviteUrl} readOnly className="h-10" />
+          <Input id="link" defaultValue={url} readOnly className="h-10" />
 
-          <Button onClick={handleCopyInvite}>Copy invitaton link</Button>
+          <Button onClick={handleCopy}>Copy invitaton link</Button>
         </div>
       </DialogContent>
     </Dialog>
   );
-}
-
-export default CopyInvite;
+};
