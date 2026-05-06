@@ -4,7 +4,7 @@ import type { Task } from "@/entities/task/model/types";
 import BacklogInfo from "../task-backlog/BacklogInfo";
 import { CopyInviteDialog } from "@/features/invite-players";
 import { Button } from "@/shared/ui/button";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 
 interface TopRoomInfoProps {
