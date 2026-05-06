@@ -18,7 +18,7 @@ interface RoomCardProps {
 
 function RoomCard({ room, actions }: RoomCardProps) {
   return (
-    <Card>
+    <Card className="rounded-md">
       <CardHeader>
         <CardTitle>
           <div className="flex items-center justify-between gap-4">
