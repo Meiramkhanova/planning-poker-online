@@ -6,7 +6,7 @@ import {
   TestTubeDiagonal,
   TrendingUpDown,
 } from "lucide-react";
-import ReasonCard from "./components/ReasonCard";
+import ReasonCard from "../../shared/ui/ReasonCard";
 import { ListChecks } from "lucide-react";
 
 const reasonCards = [

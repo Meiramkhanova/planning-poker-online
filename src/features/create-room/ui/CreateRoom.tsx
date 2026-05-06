@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
 import { useDeckPresets } from "@/entities/room/model/useDeckPresets";
 import { useCreateRoom } from "@/features/create-room/model/useCreateRoom";
 
-function CreateRoom() {
+export const CreateRoom = () => {
   const form = useForm<CreateRoomFormValues>({
     resolver: zodResolver(createRoomSchema),
     defaultValues: {
@@ -159,6 +159,4 @@ function CreateRoom() {
       </DialogContent>
     </Dialog>
   );
-}
-
-export default CreateRoom;
+};

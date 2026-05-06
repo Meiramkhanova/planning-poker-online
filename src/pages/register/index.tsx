@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { RegisterForm } from "./RegisterForm";
-import PlanPoker from "@/shared/ui/PlanPoker";
+import { RegisterForm } from "@/features/auth";
 import Container from "@/shared/ui/Container";
+import PlanPoker from "@/shared/ui/PlanPoker";
+import { Link } from "react-router-dom";
 
 const RegisterPage = () => {
   return (

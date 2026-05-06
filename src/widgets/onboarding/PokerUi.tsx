@@ -1,8 +1,8 @@
 import { cn } from "@/shared/utils/cn";
 import Logo from "@/shared/icons/LogoIcon";
 import { Eye } from "lucide-react";
-import PersonUI from "./components/PersonUI";
-import MiniCard from "./components/MiniCard";
+import PersonUI from "../../shared/ui/PersonUI";
+import MiniCard from "../../shared/ui/MiniCard";
 
 const people = [
   {

@@ -1,9 +1,9 @@
 import { useRooms } from "@/entities/room/model/useRooms";
 import Container from "@/shared/ui/Container";
 import LoadingElement from "@/shared/ui/LoadingElement";
-import CreateRoom from "@/widgets/dashboard/CreateRoom";
 import EmptyRooms from "@/entities/room/ui/EmptyRooms";
-import RoomCardList from "@/widgets/room/RoomCardList";
+import RoomCardList from "@/widgets/dashboard/RoomCardList";
+import { CreateRoom } from "@/features/create-room";
 
 function DashboardPage() {
   const { data: rooms = [], isLoading, isError } = useRooms();
