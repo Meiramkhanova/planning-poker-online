@@ -34,9 +34,14 @@ function BacklogInfo({ sortedTasks, isOwner, roomId }: BacklogInfoProps) {
   const [isCreating, setIsCreating] = useState(false);
   const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-  const { mutate: createTask, isPending } = useCreateTask(roomId);
+  const { mutate: createTask, isPending, error } = useCreateTask(roomId);
 
-  const { register, reset, handleSubmit } = useForm<CreateTaskFormValues>({
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<CreateTaskFormValues>({
     resolver: zodResolver(createTaskSchema),
     defaultValues: { title: "", description: "", position: sortedTasks.length },
   });
@@ -121,7 +126,18 @@ function BacklogInfo({ sortedTasks, isOwner, roomId }: BacklogInfoProps) {
                     type="text"
                     placeholder="What needs to be done?"
                     autoFocus
+                    className={cn(
+                      "rounded",
+                      errors.title &&
+                        "border-red-300 focus-visible:ring-red-300 focus-visible:border-red-300",
+                    )}
                   />
+
+                  {errors.title && (
+                    <span className="text-sm text-red-400">
+                      {errors.title.message}
+                    </span>
+                  )}
                 </Field>
 
                 <Field>
@@ -133,8 +149,22 @@ function BacklogInfo({ sortedTasks, isOwner, roomId }: BacklogInfoProps) {
                     id="task-desc"
                     {...register("description")}
                     placeholder="Add more details..."
+                    className={cn(
+                      "rounded",
+                      errors.description &&
+                        "border-red-300 focus-visible:ring-red-300 focus-visible:border-red-300",
+                    )}
                   />
+                  {errors.description && (
+                    <span className="text-sm text-red-400">
+                      {errors.description.message}
+                    </span>
+                  )}
                 </Field>
+
+                {error && (
+                  <div className="text-sm text-red-400">{error.message}</div>
+                )}
 
                 <div className="btns flex items-center gap-4">
                   <Button type="submit" disabled={isPending} className="flex-1">
