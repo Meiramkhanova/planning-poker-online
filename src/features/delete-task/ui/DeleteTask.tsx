@@ -47,7 +47,7 @@ export const DeleteTask = ({ taskId }: { taskId: string }) => {
           <DialogDescription>This operation is irreversible.</DialogDescription>
         </DialogHeader>
 
-        <DialogFooter className="gap-2 grid grid-cols-1 md:grid-cols-2">
+        <DialogFooter className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Button
             variant="outline"
             onClick={() => setIsOpen(false)}

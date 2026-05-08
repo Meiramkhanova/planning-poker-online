@@ -108,7 +108,7 @@ function RoomPage() {
                 <span
                   className={cn(
                     "text-[10px] font-bold bg-white/80 px-2 py-0.5 mt-0.5",
-                    "rounded text-slate-800 border border-gray-100 whitespace-nowrap",
+                    "rounded text-slate-800 border border-gray-200 whitespace-nowrap",
                   )}>
                   {p.name} {p.id === selfId ? "(You)" : ""}
                 </span>

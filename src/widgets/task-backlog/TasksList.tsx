@@ -39,7 +39,7 @@ function TasksList({ tasks }: { tasks: Task[] }) {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent align="end">
-                <EditTaskAction id={task.id} />
+                <EditTaskAction task={task} />
 
                 <DropdownMenuSeparator />
 
