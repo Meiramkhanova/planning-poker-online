@@ -10,8 +10,11 @@ import {
 import { Ellipsis } from "lucide-react";
 import { EditTaskAction } from "@/features/edit-task";
 import { DeleteTask } from "@/features/delete-task";
+import { useState } from "react";
 
 function TasksList({ tasks }: { tasks: Task[] }) {
+  const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+
   const sortedTasks = [...tasks].sort((a, b) => a.position - b.position);
 
   return (
@@ -27,7 +30,9 @@ function TasksList({ tasks }: { tasks: Task[] }) {
           key={task.id}
           task={task}
           actionsToRender={
-            <DropdownMenu>
+            <DropdownMenu
+              open={openMenuId === task.id}
+              onOpenChange={(open) => setOpenMenuId(open ? task.id : null)}>
               <DropdownMenuTrigger asChild>
                 <div
                   className={cn(
@@ -39,11 +44,17 @@ function TasksList({ tasks }: { tasks: Task[] }) {
               </DropdownMenuTrigger>
 
               <DropdownMenuContent align="end">
-                <EditTaskAction task={task} />
+                <EditTaskAction
+                  task={task}
+                  closeMenu={() => setOpenMenuId(null)}
+                />
 
                 <DropdownMenuSeparator />
 
-                <DeleteTask taskId={task.id} />
+                <DeleteTask
+                  taskId={task.id}
+                  closeMenu={() => setOpenMenuId(null)}
+                />
               </DropdownMenuContent>
             </DropdownMenu>
           }

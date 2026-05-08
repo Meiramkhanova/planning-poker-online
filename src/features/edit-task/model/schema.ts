@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const taskSchema = z.object({
-  title: z.string().min(1, "Title is required"),
+  title: z.string().min(2, "Title requires minimum 2 characters"),
   description: z.string().optional(),
   position: z.number(),
 });

@@ -18,8 +18,15 @@ import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import { useEditTask } from "../model/useEditTask";
 import { useParams } from "react-router-dom";
+import { DropdownMenuItem } from "@/shared/ui/dropdown-menu";
 
-export const EditTaskAction = ({ task }: { task: Task }) => {
+export const EditTaskAction = ({
+  task,
+  closeMenu,
+}: {
+  task: Task;
+  closeMenu: () => void;
+}) => {
   const { roomId } = useParams<{ roomId: string }>();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,6 +36,7 @@ export const EditTaskAction = ({ task }: { task: Task }) => {
     register,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<TaskFormValues>({
     resolver: zodResolver(taskSchema),
     defaultValues: {
@@ -38,27 +46,49 @@ export const EditTaskAction = ({ task }: { task: Task }) => {
     },
   });
 
+  const handleDialogChange = (open: boolean) => {
+    setIsOpen(open);
+    if (!open) {
+      closeMenu();
+    }
+  };
+
   const onSubmit = (data: TaskFormValues) => {
     mutate(
       {
         taskId: task.id,
         data,
       },
-      { onSuccess: () => setIsOpen(false) },
+      {
+        onSuccess: () => {
+          setIsOpen(false);
+          closeMenu();
+        },
+        onError: (error) => {
+          const serverErrors = error.response?.data.detail;
+
+          serverErrors?.forEach((err) => {
+            setError(err.loc[1] as keyof TaskFormValues, { message: err.msg });
+          });
+        },
+      },
     );
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger className={cn("w-full")} asChild>
-        <div
-          className={cn(
-            "flex items-center gap-2 cursor-pointer",
-            "text-sm hover:bg-gray-100 p-1",
-          )}>
-          <Pencil className="size-4" /> <span>Edit</span>
-        </div>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={handleDialogChange}>
+      <DropdownMenuItem asChild onSelect={(e) => e.preventDefault()}>
+        <DialogTrigger className={cn("w-full")} asChild>
+          <div
+            className={cn(
+              "flex items-center gap-2 cursor-pointer",
+              "text-sm hover:bg-gray-100 p-1",
+            )}>
+            <Pencil className="size-4" />{" "}
+            <span>{isPending ? "Editing" : "Edit"}</span>
+          </div>
+        </DialogTrigger>
+      </DropdownMenuItem>
 
       <DialogContent>
         <DialogHeader>
@@ -90,17 +120,29 @@ export const EditTaskAction = ({ task }: { task: Task }) => {
               className="py-5 rounded"
               {...register("description")}
             />
+
+            {errors.description && (
+              <span className="text-red-500 text-xs">
+                {errors.description.message}
+              </span>
+            )}
           </Field>
 
           <DialogFooter className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <Button
               type="button"
               variant="outline"
-              onClick={() => setIsOpen(false)}>
+              disabled={isPending}
+              onClick={() => {
+                setIsOpen(false);
+                closeMenu();
+              }}>
               Cancel
             </Button>
 
-            <Button type="submit">Save changes</Button>
+            <Button type="submit" disabled={isPending}>
+              {isPending ? "Saving..." : "Save changes"}
+            </Button>
           </DialogFooter>
         </form>
       </DialogContent>
