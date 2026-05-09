@@ -1,6 +1,10 @@
 export const getInviteUrl = (inviteLink: string) => {
+  if (!inviteLink) return "";
+
   const links = inviteLink.split(",");
-  return (
-    links.find((link) => link.includes("http://localhost:5173")) || links[0]
-  );
+
+  const lastLink = links[links.length - 1];
+  const token = lastLink.split("/").pop();
+
+  return `${window.location.origin}/invite/${token}`;
 };

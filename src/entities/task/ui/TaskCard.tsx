@@ -21,13 +21,13 @@ function TaskCard({
     <div
       className={cn(
         "task-card relative group p-4 pt-2 border rounded-md cursor-pointer",
-        "bg-white shadow-sm hover:border-sky-700/50 transition-all duration-300",
+        "bg-white shadow-sm hover:border-sky-900/50 transition-all duration-300",
         className,
       )}>
       <div className="flex justify-between items-center">
         <span
           className={cn(
-            "text-[9px] uppercase px-2 py-0.5 rounded",
+            "text-[9px] uppercase px-2 py-0.5 rounded border border-gray-200",
             "tracking-wider font-semibold text-sky-700 bg-sky-50",
             statusClassName,
           )}>
@@ -42,7 +42,7 @@ function TaskCard({
       </h4>
 
       {task.description && (
-        <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed pt-4">
+        <p className="text-xs text-gray-500 line-clamp-5 leading-relaxed pt-4">
           {task.description}
         </p>
       )}

@@ -43,7 +43,7 @@ function TasksList({
         <TaskCard
           key={task.id}
           task={task}
-          className={cn(task.id === currentTaskId && "bg-sky-50/80")}
+          className={cn(task.id === currentTaskId && "bg-sky-50/50 shadow-md")}
           statusClassName={cn(task.id === currentTaskId && "bg-white")}
           actionsToRender={
             <DropdownMenu
@@ -55,7 +55,7 @@ function TasksList({
                     "size-10 rounded-full hover:bg-gray-100 flex items-center justify-center",
                     "transition-all duration-300",
                   )}>
-                  <Ellipsis className="size-5 text-gray-600" />
+                  <Ellipsis className="size-5 text-sky-700" />
                 </div>
               </DropdownMenuTrigger>
 
