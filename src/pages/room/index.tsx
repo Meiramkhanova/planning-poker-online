@@ -3,9 +3,9 @@ import Container from "@/shared/ui/Container";
 import LoadingElement from "@/shared/ui/LoadingElement";
 import { useParams } from "react-router-dom";
 import TopRoomInfo from "@/widgets/room/TopRoomInfo";
-import { cn } from "@/shared/utils/cn";
 import Participants from "@/widgets/room/Participants";
 import DeckPresets from "@/widgets/room/DeckPresets";
+import ActiveTaskCard from "@/entities/task/ui/ActiveTaskCard";
 
 function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
@@ -40,6 +40,8 @@ function RoomPage() {
 
   const isOwner = participants.find((p) => p.id === selfId)?.role === "owner";
 
+  const activeTask = data.tasks.find((t) => t.id === roomData.current_task_id);
+
   return (
     <Container className="size-full">
       <div className="py-8 flex flex-col gap-8 h-full">
@@ -58,17 +60,7 @@ function RoomPage() {
           style={{
             fontSize: "min(5vw, 16px)",
           }}>
-          <div
-            className={cn(
-              "active-task xl:min-w-1/5 bg-sky-600 h-fit rounded-full text-center",
-              "flex items-center justify-center text-white p-8 text-base",
-            )}>
-            {roomData.current_task_id ? (
-              <div>current_task_title will be</div>
-            ) : (
-              <div>Wait for the owner to start a round...</div>
-            )}
-          </div>
+          <ActiveTaskCard activeTask={activeTask} />
 
           <Participants participants={participants} selfId={selfId} />
         </section>

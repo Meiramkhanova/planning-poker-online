@@ -88,7 +88,11 @@ function BacklogInfo({ tasks, isOwner, roomId }: BacklogInfoProps) {
           </SheetDescription>
         </SheetHeader>
 
-        {tasks.length === 0 ? <EmptyTask /> : <TasksList tasks={tasks} />}
+        {tasks.length === 0 ? (
+          <EmptyTask />
+        ) : (
+          <TasksList tasks={tasks} isOwner={isOwner} roomId={roomId} />
+        )}
 
         <SheetFooter className="pt-0 border-t border-gray-100">
           {isCreating ? (

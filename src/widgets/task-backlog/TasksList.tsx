@@ -11,9 +11,23 @@ import { Ellipsis } from "lucide-react";
 import { EditTaskAction } from "@/features/edit-task";
 import { DeleteTask } from "@/features/delete-task";
 import { useState } from "react";
+import SelectTask from "@/features/select-task/ui/SelectTask";
+import { useRoomById } from "@/entities/room/model/useRoomById";
 
-function TasksList({ tasks }: { tasks: Task[] }) {
+function TasksList({
+  tasks,
+  isOwner,
+  roomId,
+}: {
+  tasks: Task[];
+  isOwner: boolean;
+  roomId: string;
+}) {
   const [openMenuId, setOpenMenuId] = useState<string | null>(null);
+
+  const { data } = useRoomById(roomId);
+
+  const currentTaskId = data?.room.current_task_id;
 
   const sortedTasks = [...tasks].sort((a, b) => a.position - b.position);
 
@@ -29,6 +43,8 @@ function TasksList({ tasks }: { tasks: Task[] }) {
         <TaskCard
           key={task.id}
           task={task}
+          className={cn(task.id === currentTaskId && "bg-sky-50/80")}
+          statusClassName={cn(task.id === currentTaskId && "bg-white")}
           actionsToRender={
             <DropdownMenu
               open={openMenuId === task.id}
@@ -57,6 +73,14 @@ function TasksList({ tasks }: { tasks: Task[] }) {
                 />
               </DropdownMenuContent>
             </DropdownMenu>
+          }
+          footerActions={
+            <SelectTask
+              isOwner={isOwner}
+              roomId={roomId}
+              taskId={task.id}
+              isActive={task.id === currentTaskId}
+            />
           }
         />
       ))}
