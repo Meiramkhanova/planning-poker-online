@@ -6,6 +6,7 @@ import { Layout } from "../Layout";
 import RoomPage from "@/pages/room";
 import LoginPage from "@/pages/login";
 import RegisterPage from "@/pages/register";
+import NotFoundPage from "@/pages/not-found";
 
 export const routeConfig = [
   {
@@ -28,6 +29,10 @@ export const routeConfig = [
           { path: "/dashboard", element: <DashboardPage /> },
           { path: "/dashboard/room/:roomId", element: <RoomPage /> },
         ],
+      },
+      {
+        path: "*",
+        element: <NotFoundPage />,
       },
     ],
   },
