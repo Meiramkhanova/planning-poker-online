@@ -5,6 +5,7 @@ import LoadingElement from "@/shared/ui/LoadingElement";
 import { useParams } from "react-router-dom";
 import TopRoomInfo from "@/widgets/room/TopRoomInfo";
 import { cn } from "@/shared/utils/cn";
+import Participants from "@/widgets/room/Participants";
 
 function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
@@ -36,9 +37,6 @@ function RoomPage() {
   const roomData = data.room;
   const participants = data.participants || [];
   const selfId = data.self_participant_id;
-
-  const selfParticipant = participants.find((p) => p.id === selfId);
-  const selfSeatIndex = selfParticipant?.seat_index ?? 0;
 
   const isOwner = participants.find((p) => p.id === selfId)?.role === "owner";
 
@@ -72,49 +70,7 @@ function RoomPage() {
             )}
           </div>
 
-          {participants.map((p) => {
-            const angleStep = 360 / participants.length;
-            const angle = (p.seat_index - selfSeatIndex) * angleStep + 90;
-            const radiusX = 38;
-            const radiusY = 32;
-
-            const x = Math.cos((angle * Math.PI) / 180) * radiusX;
-            const y = Math.sin((angle * Math.PI) / 180) * radiusY;
-
-            return (
-              <div
-                key={p.id}
-                className="absolute transition-all duration-500 flex flex-col items-center gap-1"
-                style={{
-                  left: `${50 + x}%`,
-                  top: `${50 + y}%`,
-                  transform: "translate(-50%, -50%)",
-                }}>
-                <div
-                  className={cn(
-                    "flex items-center justify-center",
-                    "text-white font-semibold rounded",
-                    p.id === selfId && "ring-3 ring-sky-200",
-                  )}
-                  style={{
-                    width: "3em",
-                    height: "4em",
-                    backgroundColor: p.avatar_color,
-                    fontSize: "0.8em",
-                  }}>
-                  {p.has_voted ? "✓" : "?"}
-                </div>
-
-                <span
-                  className={cn(
-                    "text-[10px] font-bold bg-white/80 px-2 py-0.5 mt-0.5",
-                    "rounded text-slate-800 border border-gray-200 whitespace-nowrap",
-                  )}>
-                  {p.name} {p.id === selfId ? "(You)" : ""}
-                </span>
-              </div>
-            );
-          })}
+          <Participants participants={participants} selfId={selfId} />
         </section>
 
         <section className="voting flex flex-col items-center gap-4 mt-auto pt-8">
