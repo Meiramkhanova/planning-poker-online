@@ -104,9 +104,7 @@ export const EditTaskAction = ({
             <Input id="title" className="py-5 rounded" {...register("title")} />
 
             {errors.title && (
-              <span className="text-red-500 text-xs">
-                {errors.title.message}
-              </span>
+              <span className="text-red-500">{errors.title.message}</span>
             )}
           </Field>
 
@@ -122,9 +120,7 @@ export const EditTaskAction = ({
             />
 
             {errors.description && (
-              <span className="text-red-500 text-xs">
-                {errors.description.message}
-              </span>
+              <span className="text-red-500">{errors.description.message}</span>
             )}
           </Field>
 

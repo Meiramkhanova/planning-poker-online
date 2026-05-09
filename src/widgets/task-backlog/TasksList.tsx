@@ -11,8 +11,8 @@ import { Ellipsis } from "lucide-react";
 import { EditTaskAction } from "@/features/edit-task";
 import { DeleteTask } from "@/features/delete-task";
 import { useState } from "react";
-import SelectTask from "@/features/select-task/ui/SelectTask";
 import { useRoomById } from "@/entities/room/model/useRoomById";
+import { SelectTask } from "@/features/select-task";
 
 function TasksList({
   tasks,

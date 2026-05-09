@@ -8,7 +8,12 @@ interface SelectTaskProps {
   isActive: boolean;
 }
 
-function SelectTask({ isOwner, roomId, taskId, isActive }: SelectTaskProps) {
+export const SelectTask = ({
+  isOwner,
+  roomId,
+  taskId,
+  isActive,
+}: SelectTaskProps) => {
   const { mutate, isPending } = useSelectTask(roomId);
 
   if (!isOwner) {
@@ -24,6 +29,4 @@ function SelectTask({ isOwner, roomId, taskId, isActive }: SelectTaskProps) {
       {isPending ? "Selecting..." : isActive ? "Voting now" : "Vote this task"}
     </Button>
   );
-}
-
-export default SelectTask;
+};
