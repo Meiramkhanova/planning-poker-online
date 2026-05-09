@@ -1,4 +1,3 @@
-import { Button } from "@/shared/ui/button";
 import { useRoomById } from "@/entities/room/model/useRoomById";
 import Container from "@/shared/ui/Container";
 import LoadingElement from "@/shared/ui/LoadingElement";
@@ -6,6 +5,7 @@ import { useParams } from "react-router-dom";
 import TopRoomInfo from "@/widgets/room/TopRoomInfo";
 import { cn } from "@/shared/utils/cn";
 import Participants from "@/widgets/room/Participants";
+import DeckPresets from "@/widgets/room/DeckPresets";
 
 function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
@@ -78,17 +78,7 @@ function RoomPage() {
             Valuate a task
           </h3>
 
-          <div className="voting-card min-w-1/2 max-w-[80%] flex flex-wrap items-center gap-4 md:gap-8 justify-center">
-            {roomData?.deck.cards.map((card) => (
-              <Button
-                size="sm"
-                className="rounded"
-                variant="outline"
-                key={card}>
-                {card}
-              </Button>
-            ))}
-          </div>
+          <DeckPresets roomData={roomData} />
         </section>
       </div>
     </Container>
