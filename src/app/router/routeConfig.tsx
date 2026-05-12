@@ -7,6 +7,7 @@ import RoomPage from "@/pages/room";
 import LoginPage from "@/pages/login";
 import RegisterPage from "@/pages/register";
 import NotFoundPage from "@/pages/not-found";
+import InvitePage from "@/pages/invite";
 
 export const routeConfig = [
   {
@@ -29,6 +30,10 @@ export const routeConfig = [
           { path: "/dashboard", element: <DashboardPage /> },
           { path: "/dashboard/room/:roomId", element: <RoomPage /> },
         ],
+      },
+      {
+        path: "/invite/:token",
+        element: <InvitePage />,
       },
       {
         path: "*",
