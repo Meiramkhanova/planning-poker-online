@@ -3,38 +3,36 @@ import { useJoinRoom } from "@/features/join-invitation/model/useJoinRoom";
 import { Button } from "@/shared/ui/button";
 import LoadingElement from "@/shared/ui/LoadingElement";
 import { useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 
 function InvitePage() {
   const { token } = useParams<{ token: string }>();
-
   const navigate = useNavigate();
+  const location = useLocation();
 
   const isAuthenticated = useSessionStore((state) => state.isAuthenticated);
   const isLoading = useSessionStore((state) => state.isLoading);
 
-  const { mutate: joinRoom, isPending, error } = useJoinRoom();
+  const { mutate: joinRoom, error, isPending, status } = useJoinRoom();
 
   useEffect(() => {
     if (isLoading) return;
 
     if (!isAuthenticated) {
-      navigate("/login");
+      navigate(`/login?redirectTo=${encodeURIComponent(location.pathname)}`, {
+        replace: true,
+      });
       return;
     }
 
-    if (token && !isPending && !error) {
-      joinRoom(token, {
-        onSuccess: (data) => {
-          navigate(`/dashboard/room/${data.room.id}`, { replace: true });
-        },
-      });
+    if (token && status === "idle") {
+      joinRoom(token);
     }
-  }, [token, isAuthenticated, isLoading, joinRoom, navigate, isPending, error]);
+  }, [token, isAuthenticated, isLoading, navigate, location.pathname, status]);
 
   return (
     <div className="size-full flex items-center justify-center">
-      {error ? (
+      {error && !isPending ? (
         <div className="text-center flex flex-col gap-4">
           <p className="text-sky-800 font-medium">
             Invalid or expired invitation
@@ -45,10 +43,10 @@ function InvitePage() {
           </Button>
         </div>
       ) : (
-        <>
+        <div className="flex items-center gap-2">
           <LoadingElement className="size-fit" />
           <p className=" text-sky-800 font-medium">Joining a room...</p>
-        </>
+        </div>
       )}
     </div>
   );
