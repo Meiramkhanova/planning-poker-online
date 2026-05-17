@@ -6,6 +6,7 @@ import { CopyInviteDialog } from "@/features/invite-players";
 import { Button } from "@/shared/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
+import { CreateInvite } from "@/features/generate-invitation";
 
 interface TopRoomInfoProps {
   roomName: string;
@@ -63,6 +64,8 @@ function TopRoomInfo({
         <CopyInviteDialog inviteLink={inviteLink} />
 
         <BacklogInfo tasks={tasks} isOwner={isOwner} roomId={roomId} />
+
+        <CreateInvite roomId={roomId} />
       </div>
     </section>
   );
