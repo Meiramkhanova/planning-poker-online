@@ -63,9 +63,9 @@ function TopRoomInfo({
       <div className="right-top-info flex flex-col gap-4 sm:flex-row">
         <CopyInviteDialog inviteLink={inviteLink} />
 
-        <CreateInvite roomId={roomId} />
-
         <BacklogInfo tasks={tasks} isOwner={isOwner} roomId={roomId} />
+
+        <CreateInvite roomId={roomId} />
       </div>
     </section>
   );

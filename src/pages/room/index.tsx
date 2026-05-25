@@ -6,14 +6,11 @@ import TopRoomInfo from "@/widgets/room/TopRoomInfo";
 import Participants from "@/widgets/room/Participants";
 import DeckPresets from "@/widgets/room/DeckPresets";
 import ActiveTaskCard from "@/entities/task/ui/ActiveTaskCard";
-import { useRoomSocket } from "@/entities/room/model/useRoomSocket";
 
 function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
 
   const { data, isLoading, isError } = useRoomById(roomId ?? "");
-
-  useRoomSocket(roomId ?? "");
 
   if (isLoading) return <LoadingElement />;
 
