@@ -7,8 +7,13 @@ import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/utils/cn";
 import { useShallow } from "zustand/react/shallow";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const LoginForm = () => {
+  const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+
   const { login, isProcessing, error } = useSessionStore(
     useShallow((s) => ({
       login: s.login,
@@ -25,7 +30,21 @@ export const LoginForm = () => {
     resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = (data: LoginFormValues) => login(data);
+  const onSubmit = async (data: LoginFormValues) => {
+    try {
+      await login(data);
+
+      const redirectTo = searchParams.get("redirectTo");
+
+      if (redirectTo) {
+        navigate(redirectTo, { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+    } catch (err) {
+      console.error("Error in login:", err);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
