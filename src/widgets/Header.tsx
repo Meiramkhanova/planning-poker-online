@@ -12,9 +12,16 @@ import { cn } from "@/shared/utils/cn";
 import Container from "@/shared/ui/Container";
 import { Link } from "react-router-dom";
 import Logo from "@/shared/ui/Logo";
+import { useShallow } from "zustand/react/shallow";
 
 function Header() {
-  const { isAuthenticated, user, logout } = useSessionStore();
+  const { isAuthenticated, user, logout } = useSessionStore(
+    useShallow((state) => ({
+      isAuthenticated: state.isAuthenticated,
+      user: state.user,
+      logout: state.logout,
+    })),
+  );
 
   const initialLetterName = user?.name.charAt(0) || "U";
 
