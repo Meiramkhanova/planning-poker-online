@@ -10,8 +10,13 @@ import {
 } from "../model/registerSchema";
 import { cn } from "@/shared/utils/cn";
 import { useShallow } from "zustand/react/shallow";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const RegisterForm = () => {
+  const navigate = useNavigate();
+
+  const [searchParams] = useSearchParams();
+
   const {
     register: signUp,
     isProcessing,
@@ -32,7 +37,23 @@ export const RegisterForm = () => {
     resolver: zodResolver(registerSchema),
   });
 
-  const onSubmit = (data: RegisterFormValues) => signUp(data);
+  // const onSubmit = (data: RegisterFormValues) => signUp(data);
+
+  const onSubmit = async (data: RegisterFormValues) => {
+    try {
+      await signUp(data);
+
+      const redirectTo = searchParams.get("redirectTo");
+
+      if (redirectTo) {
+        navigate(redirectTo, { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+    } catch (err) {
+      console.error("Error while registering:", err);
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">

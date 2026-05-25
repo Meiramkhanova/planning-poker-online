@@ -9,6 +9,8 @@ export const useCreateLink = (roomId: string) => {
       createInviteLinkRequest(roomId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["room", roomId] });
+
+      queryClient.invalidateQueries({ queryKey: ["rooms"] });
     },
   });
 };

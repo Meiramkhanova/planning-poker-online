@@ -10,7 +10,7 @@ import {
 import { useSessionStore } from "@/entities/session/model/store";
 import { cn } from "@/shared/utils/cn";
 import Container from "@/shared/ui/Container";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Logo from "@/shared/ui/Logo";
 import { useShallow } from "zustand/react/shallow";
 
@@ -23,7 +23,14 @@ function Header() {
     })),
   );
 
+  const navigate = useNavigate();
+
   const initialLetterName = user?.name.charAt(0) || "U";
+
+  const handleSignOut = () => {
+    logout();
+    navigate("/login", { replace: true });
+  };
 
   return (
     <header>
@@ -87,7 +94,7 @@ function Header() {
                     <DropdownMenuSeparator />
 
                     <DropdownMenuItem
-                      onClick={logout}
+                      onClick={handleSignOut}
                       className="text-red-500 focus:bg-red-50 focus:text-red-600 cursor-pointer">
                       Sign out
                     </DropdownMenuItem>

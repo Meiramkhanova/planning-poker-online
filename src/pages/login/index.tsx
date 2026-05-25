@@ -1,9 +1,13 @@
 import Container from "@/shared/ui/Container";
-import { Link } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import PlanPoker from "@/shared/ui/PlanPoker";
 import { LoginForm } from "@/features/auth";
 
 const LoginPage = () => {
+  const [searchParams] = useSearchParams();
+
+  const redirectTo = searchParams.get("redirectTo");
+
   return (
     <div className="wrapper h-full flex items-center py-8">
       <Container>
@@ -19,7 +23,9 @@ const LoginPage = () => {
 
             <div className="text-center text-gray-500 text-sm pt-4">
               Don't have an account?{" "}
-              <Link to="/register" className="text-gray-700">
+              <Link
+                to={`/register${redirectTo ? `?redirectTo=${encodeURIComponent(redirectTo)}` : ""}`}
+                className="text-gray-700">
                 Create account
               </Link>
             </div>
