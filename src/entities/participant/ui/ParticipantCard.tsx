@@ -18,6 +18,7 @@ export const ParticipantCard = ({
     className={cn(
       "absolute transition-all duration-500 flex flex-col items-center gap-1",
       className,
+      !participant.is_online && "opacity-50 grayscale  pointer-events-none",
     )}
     style={style}>
     <div
@@ -32,7 +33,7 @@ export const ParticipantCard = ({
         backgroundColor: participant.avatar_color,
         fontSize: "0.8em",
       }}>
-      {participant.has_voted ? "✓" : "?"}
+      {!participant.is_online ? "—" : participant.has_voted ? "✓" : "?"}
     </div>
 
     <span
