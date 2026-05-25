@@ -7,20 +7,13 @@ import { Input } from "@/shared/ui/input";
 import { Button } from "@/shared/ui/button";
 import { cn } from "@/shared/utils/cn";
 import { useShallow } from "zustand/react/shallow";
-import { useEffect } from "react";
-import { useNavigate, useSearchParams } from "react-router-dom";
 
 export const LoginForm = () => {
-  const navigate = useNavigate();
-
-  const [searchParams] = useSearchParams();
-
-  const { login, isProcessing, error, isAuthenticated } = useSessionStore(
+  const { login, isProcessing, error } = useSessionStore(
     useShallow((s) => ({
       login: s.login,
       isProcessing: s.isProcessing,
       error: s.error,
-      isAuthenticated: s.isAuthenticated,
     })),
   );
 
@@ -31,18 +24,6 @@ export const LoginForm = () => {
   } = useForm<LoginFormValues>({
     resolver: zodResolver(loginSchema),
   });
-
-  useEffect(() => {
-    if (isAuthenticated) {
-      const redirectTo = searchParams.get("redirectTo");
-
-      if (redirectTo) {
-        navigate(redirectTo, { replace: true });
-      } else {
-        navigate("/dashboard", { replace: true });
-      }
-    }
-  }, [isAuthenticated, navigate, searchParams]);
 
   const onSubmit = (data: LoginFormValues) => login(data);
 
