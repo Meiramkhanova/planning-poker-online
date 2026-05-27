@@ -6,7 +6,7 @@ import { Button } from "@/shared/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { CreateInvite } from "@/features/generate-invitation";
-import { CopyInviteDialog } from "@/shared/ui/CopyInviteDialog";
+import { InvitePlayers } from "@/features/invite-players";
 
 interface TopRoomInfoProps {
   roomName: string;
@@ -61,7 +61,7 @@ function TopRoomInfo({
       </div>
 
       <div className="right-top-info flex flex-col gap-4 sm:flex-row">
-        <CopyInviteDialog inviteLink={inviteLink} />
+        <InvitePlayers inviteLink={inviteLink} />
 
         <CreateInvite roomId={roomId} />
 

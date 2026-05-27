@@ -21,12 +21,18 @@ export const SelectTask = ({
   }
 
   return (
-    <Button
-      onClick={() => mutate({ taskId })}
-      size="sm"
-      className="rounded text-xs"
-      disabled={isPending}>
-      {isPending ? "Selecting..." : isActive ? "Voting now" : "Vote this task"}
-    </Button>
+    <div className="actions flex items-center justify-between pt-4">
+      <Button
+        onClick={() => mutate({ taskId })}
+        size="sm"
+        className="rounded text-xs"
+        disabled={isPending}>
+        {isPending
+          ? "Selecting..."
+          : isActive
+            ? "Voting now"
+            : "Vote this task"}
+      </Button>
+    </div>
   );
 };

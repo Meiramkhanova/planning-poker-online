@@ -43,36 +43,42 @@ function TasksList({
         <TaskCard
           key={task.id}
           task={task}
-          className={cn(task.id === currentTaskId && "bg-sky-50/50 shadow-md")}
+          isOwner={isOwner}
+          className={cn(
+            task.id === currentTaskId && "bg-sky-50/50 shadow-md",
+            isOwner && "pt-2",
+          )}
           statusClassName={cn(task.id === currentTaskId && "bg-white")}
           actionsToRender={
-            <DropdownMenu
-              open={openMenuId === task.id}
-              onOpenChange={(open) => setOpenMenuId(open ? task.id : null)}>
-              <DropdownMenuTrigger asChild>
-                <div
-                  className={cn(
-                    "size-10 rounded-full hover:bg-gray-100 flex items-center justify-center",
-                    "transition-all duration-300",
-                  )}>
-                  <Ellipsis className="size-5 text-sky-700" />
-                </div>
-              </DropdownMenuTrigger>
+            isOwner && (
+              <DropdownMenu
+                open={openMenuId === task.id}
+                onOpenChange={(open) => setOpenMenuId(open ? task.id : null)}>
+                <DropdownMenuTrigger asChild>
+                  <div
+                    className={cn(
+                      "size-10 rounded-full hover:bg-gray-100 flex items-center justify-center",
+                      "transition-all duration-300",
+                    )}>
+                    <Ellipsis className="size-5 text-sky-700" />
+                  </div>
+                </DropdownMenuTrigger>
 
-              <DropdownMenuContent align="end">
-                <EditTaskAction
-                  task={task}
-                  closeMenu={() => setOpenMenuId(null)}
-                />
+                <DropdownMenuContent align="end">
+                  <EditTaskAction
+                    task={task}
+                    closeMenu={() => setOpenMenuId(null)}
+                  />
 
-                <DropdownMenuSeparator />
+                  <DropdownMenuSeparator />
 
-                <DeleteTask
-                  taskId={task.id}
-                  closeMenu={() => setOpenMenuId(null)}
-                />
-              </DropdownMenuContent>
-            </DropdownMenu>
+                  <DeleteTask
+                    taskId={task.id}
+                    closeMenu={() => setOpenMenuId(null)}
+                  />
+                </DropdownMenuContent>
+              </DropdownMenu>
+            )
           }
           footerActions={
             <SelectTask

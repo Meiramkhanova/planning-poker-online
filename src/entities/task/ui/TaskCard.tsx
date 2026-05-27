@@ -8,6 +8,7 @@ interface TaskCardProps {
   footerActions: React.ReactNode;
   className?: string;
   statusClassName?: string;
+  isOwner?: boolean;
 }
 
 function TaskCard({
@@ -16,11 +17,12 @@ function TaskCard({
   footerActions,
   className,
   statusClassName,
+  isOwner,
 }: TaskCardProps) {
   return (
     <div
       className={cn(
-        "task-card relative group p-4 pt-2 border rounded-md cursor-pointer",
+        "task-card relative group p-4 border rounded-md cursor-pointer",
         "bg-white shadow-sm hover:border-sky-900/50 transition-all duration-300",
         className,
       )}>
@@ -37,7 +39,11 @@ function TaskCard({
         {actionsToRender}
       </div>
 
-      <h4 className="font-semibold text-gray-700 text-sm leading-none">
+      <h4
+        className={cn(
+          "font-medium text-gray-700 text-sm leading-none",
+          !isOwner ? "pt-4" : "pt-2",
+        )}>
         {task.title}
       </h4>
 
@@ -47,9 +53,7 @@ function TaskCard({
         </p>
       )}
 
-      <div className="actions flex items-center justify-between pt-4">
-        {footerActions}
-      </div>
+      {footerActions}
     </div>
   );
 }

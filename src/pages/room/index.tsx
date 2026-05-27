@@ -4,9 +4,10 @@ import LoadingElement from "@/shared/ui/LoadingElement";
 import { useParams } from "react-router-dom";
 import TopRoomInfo from "@/widgets/room/TopRoomInfo";
 import Participants from "@/widgets/room/Participants";
-import DeckPresets from "@/widgets/room/DeckPresets";
 import ActiveTaskCard from "@/entities/task/ui/ActiveTaskCard";
 import { useRoomSocket } from "@/entities/room/model/useRoomSocket";
+
+import VotingControl from "@/widgets/room/VotingControl";
 
 function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
@@ -45,6 +46,8 @@ function RoomPage() {
 
   const activeTask = data.tasks.find((t) => t.id === roomData.current_task_id);
 
+  const isRoundActive = !!data.active_round;
+
   return (
     <Container className="size-full">
       <div className="py-8 flex flex-col gap-8 h-full">
@@ -63,18 +66,21 @@ function RoomPage() {
           style={{
             fontSize: "min(5vw, 16px)",
           }}>
-          <ActiveTaskCard activeTask={activeTask} />
+          <ActiveTaskCard
+            activeTask={activeTask}
+            isOwner={isOwner}
+            isRoundActive={isRoundActive}
+          />
 
           <Participants participants={participants} selfId={selfId} />
         </section>
 
-        <section className="voting flex flex-col items-center gap-4 mt-auto pt-8">
-          <h3 className="text-gray-700 text-center w-full text-sm">
-            Valuate a task
-          </h3>
-
-          <DeckPresets roomData={roomData} />
-        </section>
+        <VotingControl
+          currentTaskId={roomData.current_task_id}
+          isRoundActive={isRoundActive}
+          isOwner={isOwner}
+          deck={roomData.deck}
+        />
       </div>
     </Container>
   );

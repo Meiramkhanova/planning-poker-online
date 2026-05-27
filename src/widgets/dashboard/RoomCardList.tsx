@@ -1,7 +1,7 @@
 import type { Room } from "@/entities/room/model/types";
 import RoomCard from "@/entities/room/ui/RoomCard";
-import { CopyInvite } from "@/shared/ui/CopyInvite";
-import { OpenRoomBtn } from "@/shared/ui/OpenRoomBtn";
+import { CopyInviteBtn } from "@/features/copy-invite";
+import { OpenRoomBtn } from "@/features/open-room/ui/OpenRoomBtn";
 
 function RoomCardList({ rooms }: { rooms: Room[] }) {
   return (
@@ -12,7 +12,7 @@ function RoomCardList({ rooms }: { rooms: Room[] }) {
           key={room.id}
           actions={
             <div className="btns grid grid-cols-1 sm:grid-cols-2 gap-8 w-full">
-              <CopyInvite inviteLink={room.invite_link} />
+              <CopyInviteBtn inviteLink={room.invite_link} />
 
               <OpenRoomBtn roomId={room.id} />
             </div>

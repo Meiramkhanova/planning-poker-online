@@ -13,7 +13,7 @@ import { copyToClipboard } from "@/shared/utils/copyToClipboard";
 import { getInviteUrl } from "@/shared/utils/getInviteUrl";
 import { useState } from "react";
 
-export const CopyInviteDialog = ({ inviteLink }: { inviteLink: string }) => {
+export const InvitePlayers = ({ inviteLink }: { inviteLink: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const url = getInviteUrl(inviteLink);
