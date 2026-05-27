@@ -2,11 +2,11 @@ import { Badge } from "@/shared/ui/badge";
 import { cn } from "@/shared/utils/cn";
 import type { Task } from "@/entities/task/model/types";
 import BacklogInfo from "../task-backlog/BacklogInfo";
-import { CopyInviteDialog } from "@/features/invite-players";
 import { Button } from "@/shared/ui/button";
 import { Link } from "react-router-dom";
 import { ChevronLeft } from "lucide-react";
 import { CreateInvite } from "@/features/generate-invitation";
+import { CopyInviteDialog } from "@/shared/ui/CopyInviteDialog";
 
 interface TopRoomInfoProps {
   roomName: string;

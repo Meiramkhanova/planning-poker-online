@@ -1,7 +1,7 @@
 import type { Room } from "@/entities/room/model/types";
 import RoomCard from "@/entities/room/ui/RoomCard";
-import { CopyInvite } from "@/features/copy-invite";
-import { OpenRoomBtn } from "@/features/open-room";
+import { CopyInvite } from "@/shared/ui/CopyInvite";
+import { OpenRoomBtn } from "@/shared/ui/OpenRoomBtn";
 
 function RoomCardList({ rooms }: { rooms: Room[] }) {
   return (
