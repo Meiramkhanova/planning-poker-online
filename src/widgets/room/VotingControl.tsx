@@ -2,6 +2,9 @@ import DeckPresets from "@/widgets/room/DeckPresets";
 import type { RoomDeckPreset } from "@/entities/room/model/types";
 import { StartRoundButton } from "@/features/start-voting";
 import { useSubmitVote } from "@/features/submit-vote/model/useSubmitVote";
+import { useRevealRound } from "@/features/revealRound/model/useRevealRound";
+import { Button } from "@/shared/ui/button";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 
 interface VotingControlProps {
   currentTaskId: string | null;
@@ -11,6 +14,9 @@ interface VotingControlProps {
   roomId: string;
   currentRoundId: string;
   selfVoteValue: string;
+  roundStatus: "voting" | "revealed" | "closed" | null;
+  averageScore: number | null;
+  canReveal: boolean;
 }
 
 function VotingControl({
@@ -21,14 +27,28 @@ function VotingControl({
   roomId,
   currentRoundId,
   selfVoteValue,
+  roundStatus,
+  averageScore,
+  canReveal,
 }: VotingControlProps) {
-  const { mutate: submitVote, isPending } = useSubmitVote(roomId);
+  const { mutate: submitVote, isPending: isVotePending } =
+    useSubmitVote(roomId);
+
+  const { mutate: revealRound, isPending: isRevealPending } =
+    useRevealRound(roomId);
 
   const handleVote = (value: string) => {
     if (!currentRoundId) return;
 
     submitVote({ roundId: currentRoundId, value });
   };
+
+  const handleReveal = () => {
+    if (!currentRoundId) return;
+    revealRound(currentRoundId);
+  };
+
+  const isRevealDisabled = isRevealPending || !canReveal;
 
   return (
     <section className="voting flex flex-col items-center gap-4 mt-auto pt-8">
@@ -40,7 +60,6 @@ function VotingControl({
             : "Waiting for the moderator to select a task..."}
         </h3>
       )}
-
       {/* task chosen through select but round does not started yet */}
       {currentTaskId && !isRoundActive && (
         <div className="flex flex-col items-center gap-4 w-full">
@@ -49,26 +68,65 @@ function VotingControl({
               ? "Click 'Start' to begin voting"
               : "Waiting for moderator"}
           </h3>
+
           {isOwner && (
             <StartRoundButton roomId={roomId} taskId={currentTaskId} />
           )}
         </div>
       )}
-
       {/* round started */}
-      {currentTaskId && isRoundActive && (
-        <>
+      {currentTaskId && isRoundActive && roundStatus === "voting" && (
+        <div className="flex flex-col items-center gap-4 w-full">
+          {isOwner && (
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button onClick={handleReveal} disabled={isRevealDisabled}>
+                  {isRevealPending ? "Revealing..." : "Reveal Cards"}
+                </Button>
+              </TooltipTrigger>
+
+              <TooltipContent>
+                <p>Waiting for votes to be submitted...</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
+
           <h3 className="text-gray-700 text-center w-full text-sm">
-            Valuate a task
+            {selfVoteValue ? "You have voted" : "Valuate a task"}
           </h3>
 
           <DeckPresets
             deckPresets={deck}
             onVote={handleVote}
             selectedValue={selfVoteValue}
-            disabled={isPending}
+            disabled={isVotePending}
           />
-        </>
+        </div>
+      )}
+
+      {/*cards revealed */}
+      {currentTaskId && isRoundActive && roundStatus === "revealed" && (
+        <div className="flex flex-col items-center gap-2 w-full text-center">
+          <h3 className="text-emerald-700 font-semibold text-base">
+            Cards Revealed! 🎉
+          </h3>
+
+          {averageScore !== null && (
+            <p className="text-gray-600 text-sm">
+              Average Score:{" "}
+              <span className="font-bold text-gray-900 text-lg">
+                {averageScore}
+              </span>
+            </p>
+          )}
+
+          {isOwner && (
+            <p className="text-xs text-gray-400 mt-2">
+              You can now finalize this task estimation from the backlog or
+              active card.
+            </p>
+          )}
+        </div>
       )}
     </section>
   );

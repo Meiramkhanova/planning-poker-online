@@ -51,6 +51,12 @@ function RoomPage() {
 
   const selfVoteValue = data.active_round?.self_vote_value ?? null;
 
+  const roundStatus = data.active_round?.status ?? null;
+
+  const averageScore = data.active_round?.average_score ?? null;
+
+  const canReveal = data?.active_round?.can_reveal ?? false;
+
   return (
     <Container className="size-full">
       <div className="py-8 flex flex-col gap-8 h-full">
@@ -86,6 +92,9 @@ function RoomPage() {
           deck={roomData.deck}
           currentRoundId={currentRoundId ?? null}
           selfVoteValue={selfVoteValue}
+          roundStatus={roundStatus}
+          averageScore={averageScore}
+          canReveal={canReveal}
         />
       </div>
     </Container>

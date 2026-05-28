@@ -39,7 +39,7 @@ export interface ActiveRound {
   id: string;
   task_id: string;
   round_index: number;
-  status: string;
+  status: "voting" | "revealed" | "closed" | null;
   started_at: string;
   revealed_at: string;
   closed_at: string;
