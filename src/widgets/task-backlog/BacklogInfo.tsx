@@ -9,11 +9,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/shared/ui/sheet";
-import EmptyTask from "@/entities/task/ui/EmptyTask";
 import TasksList from "./TasksList";
 import { CreateTaskForm } from "@/features/create-task";
 import { useState } from "react";
 import { PanelRight, Plus } from "lucide-react";
+import { cn } from "@/shared/utils/cn";
 
 interface BacklogInfoProps {
   tasks: Task[];
@@ -61,7 +61,15 @@ function BacklogInfo({ tasks, isOwner, roomId }: BacklogInfoProps) {
         </SheetHeader>
 
         {tasks.length === 0 ? (
-          <EmptyTask />
+          <div
+            className={cn(
+              "empty-rooms flex flex-col items-center justify-center text-center h-full",
+              "border-2 border-dashed rounded-2xl bg-gray-50/50 mx-4 mb-4 p-4 text-gray-600",
+            )}>
+            {isOwner
+              ? "No tasks yet. Create one!"
+              : "No tasks yet. Waiting for the moderator to create one..."}
+          </div>
         ) : (
           <TasksList tasks={tasks} isOwner={isOwner} roomId={roomId} />
         )}

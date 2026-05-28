@@ -1,6 +1,7 @@
 import DeckPresets from "@/widgets/room/DeckPresets";
 import type { RoomDeckPreset } from "@/entities/room/model/types";
 import { StartRoundButton } from "@/features/start-voting";
+import { useSubmitVote } from "@/features/submit-vote/model/useSubmitVote";
 
 interface VotingControlProps {
   currentTaskId: string | null;
@@ -8,6 +9,8 @@ interface VotingControlProps {
   isOwner: boolean;
   deck: RoomDeckPreset;
   roomId: string;
+  currentRoundId: string;
+  selfVoteValue: string;
 }
 
 function VotingControl({
@@ -16,7 +19,17 @@ function VotingControl({
   isOwner,
   deck,
   roomId,
+  currentRoundId,
+  selfVoteValue,
 }: VotingControlProps) {
+  const { mutate: submitVote, isPending } = useSubmitVote(roomId);
+
+  const handleVote = (value: string) => {
+    if (!currentRoundId) return;
+
+    submitVote({ roundId: currentRoundId, value });
+  };
+
   return (
     <section className="voting flex flex-col items-center gap-4 mt-auto pt-8">
       {/* task is not chosen yet in backlog */}
@@ -49,7 +62,12 @@ function VotingControl({
             Valuate a task
           </h3>
 
-          <DeckPresets deckPresets={deck} />
+          <DeckPresets
+            deckPresets={deck}
+            onVote={handleVote}
+            selectedValue={selfVoteValue}
+            disabled={isPending}
+          />
         </>
       )}
     </section>

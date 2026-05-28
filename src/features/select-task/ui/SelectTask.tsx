@@ -1,5 +1,6 @@
 import { Button } from "@/shared/ui/button";
 import { useSelectTask } from "../model/useSelectTask";
+import { useRoomById } from "@/entities/room/model/useRoomById";
 
 interface SelectTaskProps {
   isOwner: boolean;
@@ -16,6 +17,10 @@ export const SelectTask = ({
 }: SelectTaskProps) => {
   const { mutate, isPending } = useSelectTask(roomId);
 
+  const { data } = useRoomById(roomId);
+
+  const isRoundActive = !!data?.active_round;
+
   if (!isOwner) {
     return null;
   }
@@ -26,12 +31,14 @@ export const SelectTask = ({
         onClick={() => mutate({ taskId })}
         size="sm"
         className="rounded text-xs"
-        disabled={isPending}>
+        disabled={isPending || isRoundActive}>
         {isPending
           ? "Selecting..."
-          : isActive
-            ? "Voting now"
-            : "Vote this task"}
+          : isRoundActive && isActive
+            ? "Round in progress"
+            : isActive
+              ? "Voting now"
+              : "Vote this task"}
       </Button>
     </div>
   );

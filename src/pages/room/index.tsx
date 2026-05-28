@@ -6,7 +6,6 @@ import TopRoomInfo from "@/widgets/room/TopRoomInfo";
 import Participants from "@/widgets/room/Participants";
 import ActiveTaskCard from "@/entities/task/ui/ActiveTaskCard";
 import { useRoomSocket } from "@/entities/room/model/useRoomSocket";
-
 import VotingControl from "@/widgets/room/VotingControl";
 
 function RoomPage() {
@@ -48,6 +47,10 @@ function RoomPage() {
 
   const isRoundActive = !!data.active_round;
 
+  const currentRoundId = data.active_round?.id;
+
+  const selfVoteValue = data.active_round?.self_vote_value ?? null;
+
   return (
     <Container className="size-full">
       <div className="py-8 flex flex-col gap-8 h-full">
@@ -81,6 +84,8 @@ function RoomPage() {
           isRoundActive={isRoundActive}
           isOwner={isOwner}
           deck={roomData.deck}
+          currentRoundId={currentRoundId ?? null}
+          selfVoteValue={selfVoteValue}
         />
       </div>
     </Container>
