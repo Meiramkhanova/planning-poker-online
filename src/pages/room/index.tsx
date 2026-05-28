@@ -53,6 +53,8 @@ function RoomPage() {
 
   const roundStatus = data.active_round?.status ?? null;
 
+  const roundVotes = data.active_round?.votes ?? [];
+
   const averageScore = data.active_round?.average_score ?? null;
 
   const canReveal = data?.active_round?.can_reveal ?? false;
@@ -81,7 +83,12 @@ function RoomPage() {
             isRoundActive={isRoundActive}
           />
 
-          <Participants participants={participants} selfId={selfId} />
+          <Participants
+            participants={participants}
+            selfId={selfId}
+            roundStatus={data?.active_round?.status ?? null}
+            votes={roundVotes}
+          />
         </section>
 
         <VotingControl

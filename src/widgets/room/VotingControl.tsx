@@ -107,21 +107,21 @@ function VotingControl({
       {/*cards revealed */}
       {currentTaskId && isRoundActive && roundStatus === "revealed" && (
         <div className="flex flex-col items-center gap-2 w-full text-center">
-          <h3 className="text-emerald-700 font-semibold text-base">
+          <h3 className="text-sky-800 font-semibold text-base">
             Cards Revealed! 🎉
           </h3>
 
           {averageScore !== null && (
             <p className="text-gray-600 text-sm">
               Average Score:{" "}
-              <span className="font-bold text-gray-900 text-lg">
+              <span className="font-bold text-sky-800 text-lg">
                 {averageScore}
               </span>
             </p>
           )}
 
           {isOwner && (
-            <p className="text-xs text-gray-400 mt-2">
+            <p className="text-xs text-gray-500">
               You can now finalize this task estimation from the backlog or
               active card.
             </p>
