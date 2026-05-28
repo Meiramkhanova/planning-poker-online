@@ -40,12 +40,7 @@ export const useRoomSocket = (roomId: string) => {
         try {
           const data = JSON.parse(event.data);
 
-          if (
-            data.type === "room.snapshot" ||
-            data.type === "presence.changed"
-          ) {
-            console.log(`Got WS [${data.type}]. Invalidating cache...`);
-
+          if (data.type) {
             queryClient.invalidateQueries({ queryKey: ["room", roomId] });
           }
         } catch (err) {
