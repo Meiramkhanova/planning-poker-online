@@ -1,13 +1,13 @@
-import { Button } from "@/shared/ui/button";
-import { Rocket } from "lucide-react";
 import DeckPresets from "@/widgets/room/DeckPresets";
 import type { RoomDeckPreset } from "@/entities/room/model/types";
+import { StartRoundButton } from "@/features/start-voting";
 
 interface VotingControlProps {
   currentTaskId: string | null;
   isRoundActive: boolean;
   isOwner: boolean;
   deck: RoomDeckPreset;
+  roomId: string;
 }
 
 function VotingControl({
@@ -15,6 +15,7 @@ function VotingControl({
   isRoundActive,
   isOwner,
   deck,
+  roomId,
 }: VotingControlProps) {
   return (
     <section className="voting flex flex-col items-center gap-4 mt-auto pt-8">
@@ -36,11 +37,7 @@ function VotingControl({
               : "Waiting for moderator"}
           </h3>
           {isOwner && (
-            <Button
-            // onClick={handleStartRound}
-            >
-              <Rocket /> Start Round
-            </Button>
+            <StartRoundButton roomId={roomId} taskId={currentTaskId} />
           )}
         </div>
       )}

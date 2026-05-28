@@ -76,6 +76,7 @@ function RoomPage() {
         </section>
 
         <VotingControl
+          roomId={roomId ?? ""}
           currentTaskId={roomData.current_task_id}
           isRoundActive={isRoundActive}
           isOwner={isOwner}
