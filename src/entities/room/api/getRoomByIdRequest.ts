@@ -1,8 +1,8 @@
 import { apiInstance } from "../../../shared/api/base";
-import type { GetRoomResponse } from "@/entities/room/model/types";
+import type { RoomSnapshotResponse } from "../model/types";
 
 export const getRoomByIdRequest = async (roomId: string) => {
-  const res = await apiInstance.get<GetRoomResponse>(`/rooms/${roomId}`);
+  const res = await apiInstance.get<RoomSnapshotResponse>(`/rooms/${roomId}`);
 
   return res.data;
 };

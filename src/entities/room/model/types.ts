@@ -1,4 +1,5 @@
-import type { CreateRoomResponse } from "@/features/create-room/model/types";
+import type { Participant } from "@/entities/participant/model/types";
+import type { Task } from "@/entities/task/model/types";
 
 export interface Room {
   id: string;
@@ -11,8 +12,6 @@ export interface Room {
   last_activity_at: string;
   created_at: string;
 }
-
-export type GetRoomResponse = CreateRoomResponse;
 
 export interface FullRoom {
   id: string;
@@ -81,4 +80,13 @@ export interface History {
     additionalProp3: number;
   };
   created_at: string;
+}
+
+export interface RoomSnapshotResponse {
+  room: FullRoom;
+  self_participant_id: string;
+  participants: Participant[];
+  tasks: Task[];
+  active_round: ActiveRound;
+  history: History[];
 }
