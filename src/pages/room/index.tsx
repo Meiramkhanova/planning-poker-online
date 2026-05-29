@@ -59,6 +59,8 @@ function RoomPage() {
 
   const canReveal = data?.active_round?.can_reveal ?? false;
 
+  const suggestedResult = data?.active_round?.suggested_result;
+
   return (
     <Container className="size-full">
       <div className="py-8 flex flex-col gap-8 h-full">
@@ -102,6 +104,7 @@ function RoomPage() {
           roundStatus={roundStatus}
           averageScore={averageScore}
           canReveal={canReveal}
+          suggestedResult={suggestedResult}
         />
       </div>
     </Container>

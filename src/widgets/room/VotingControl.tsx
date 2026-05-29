@@ -6,6 +6,7 @@ import { useRevealRound } from "@/features/revealRound/model/useRevealRound";
 import { Button } from "@/shared/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
 import { useResetRound } from "@/features/reset-round/model/useResetRound";
+import { useFinalizeRound } from "@/features/finalize-round/model/useFinalizeRound";
 
 interface VotingControlProps {
   currentTaskId: string | null;
@@ -13,11 +14,12 @@ interface VotingControlProps {
   isOwner: boolean;
   deck: RoomDeckPreset;
   roomId: string;
-  currentRoundId: string;
+  currentRoundId: string | null;
   selfVoteValue: string;
   roundStatus: "voting" | "revealed" | "closed" | null;
   averageScore: number | null;
   canReveal: boolean;
+  suggestedResult: string | null;
 }
 
 function VotingControl({
@@ -31,6 +33,7 @@ function VotingControl({
   roundStatus,
   averageScore,
   canReveal,
+  suggestedResult,
 }: VotingControlProps) {
   const { mutate: submitVote, isPending: isVotePending } =
     useSubmitVote(roomId);
@@ -40,6 +43,9 @@ function VotingControl({
 
   const { mutate: resetRound, isPending: isResetPending } =
     useResetRound(roomId);
+
+  const { mutate: finalizeRound, isPending: isFinalizePending } =
+    useFinalizeRound(roomId);
 
   const handleVote = (value: string) => {
     if (!currentRoundId) return;
@@ -55,6 +61,17 @@ function VotingControl({
   const handleReset = () => {
     if (!currentRoundId) return;
     resetRound(currentRoundId);
+  };
+
+  const handleFinalize = () => {
+    if (!currentRoundId) return;
+
+    const finalValue = suggestedResult ?? "0";
+
+    finalizeRound({
+      roundId: currentRoundId,
+      resultValue: finalValue,
+    });
   };
 
   const isRevealDisabled = isRevealPending || !canReveal;
@@ -133,29 +150,36 @@ function VotingControl({
             Cards Revealed! 🎉
           </h3>
 
-          {averageScore !== null && (
-            <p className="text-gray-600 text-sm">
-              Average Score:{" "}
-              <span className="font-bold text-sky-800 text-lg">
-                {averageScore}
-              </span>
-            </p>
-          )}
+          <p className="text-sm text-gray-600">
+            Average Score:{" "}
+            <span className="font-bold">{averageScore}</span>{" "}
+          </p>
+
+          <p className="text-sm text-gray-600">
+            Suggested Result:{" "}
+            <span className="font-bold">{suggestedResult}</span>
+          </p>
 
           {isOwner && (
-            <div className="reset-info flex flex-col items-center gap-3">
-              <p className="text-xs text-gray-500 max-w-xs">
-                You can now finalize this task estimation from the backlog or
-                active card. If agreement wasn't reached, you can restart
-                voting.
-              </p>
-
-              <Button
-                variant="outline"
-                onClick={handleReset}
-                disabled={isResetPending}>
-                {isResetPending ? "Restarting..." : "Restart Voting"}
+            <div className="owner-controls flex flex-col items-center gap-3">
+              <Button onClick={handleFinalize} disabled={isFinalizePending}>
+                {isFinalizePending
+                  ? "Saving..."
+                  : `Finalize with "${suggestedResult ?? "0"}"`}
               </Button>
+
+              <div className="flex flex-col gap-1 items-center w-full mt-2 border-t pt-3">
+                <p className="text-xs text-gray-400">
+                  Didn't reach an agreement?
+                </p>
+
+                <Button
+                  variant="outline"
+                  onClick={handleReset}
+                  disabled={isResetPending}>
+                  {isResetPending ? "Restarting..." : "Restart Voting"}
+                </Button>
+              </div>
             </div>
           )}
         </div>

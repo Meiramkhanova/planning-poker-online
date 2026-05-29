@@ -6,8 +6,8 @@ export const useResetRound = (roomId: string) => {
 
   return useMutation({
     mutationFn: (round_id: string) => resetRoundRequest(roomId, round_id),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["room", roomId] });
+    onSuccess: (data) => {
+      queryClient.setQueryData(["room", roomId], data);
     },
   });
 };

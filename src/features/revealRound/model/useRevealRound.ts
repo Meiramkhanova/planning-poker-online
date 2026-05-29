@@ -7,8 +7,8 @@ export const useRevealRound = (roomId: string) => {
   return useMutation({
     mutationFn: (roundId: string) => revealRoundRequest(roomId, roundId),
 
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["room", roomId] });
+    onSuccess: (data) => {
+      queryClient.setQueryData(["room", roomId], data);
     },
   });
 };
