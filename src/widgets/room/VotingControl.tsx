@@ -77,7 +77,7 @@ function VotingControl({
   const isRevealDisabled = isRevealPending || !canReveal;
 
   return (
-    <section className="voting flex flex-col items-center gap-4 mt-auto pt-8">
+    <section className="voting flex flex-col items-center gap-4 mt-auto">
       {/* task is not chosen yet in backlog */}
       {!currentTaskId && (
         <h3 className="text-gray-400 text-center w-full text-sm">
@@ -145,41 +145,43 @@ function VotingControl({
 
       {/*cards revealed */}
       {currentTaskId && isRoundActive && roundStatus === "revealed" && (
-        <div className="flex flex-col items-center gap-2 w-full text-center">
+        <div className="flex flex-col items-center gap-2 text-center">
           <h3 className="text-sky-800 font-semibold text-base">
             Cards Revealed! 🎉
           </h3>
 
-          <p className="text-sm text-gray-600">
-            Average Score:{" "}
-            <span className="font-bold">{averageScore}</span>{" "}
-          </p>
+          <div className="scores-result flex items-center gap-2 border p-2 px-4 rounded-2xl">
+            <p className="text-sm text-gray-600">
+              Average Score:{" "}
+              <span className="font-bold text-sky-800">
+                {averageScore}
+              </span>{" "}
+            </p>
 
-          <p className="text-sm text-gray-600">
-            Suggested Result:{" "}
-            <span className="font-bold">{suggestedResult}</span>
-          </p>
+            <p className="text-sm text-gray-600 border-l-2 pl-2">
+              Suggested Result:{" "}
+              <span className="font-bold text-sky-800">{suggestedResult}</span>
+            </p>
+          </div>
 
           {isOwner && (
-            <div className="owner-controls flex flex-col items-center gap-3">
-              <Button onClick={handleFinalize} disabled={isFinalizePending}>
+            <div className="owner-controls flex flex-col sm:flex-row items-center gap-4 mt-2 w-full">
+              <Button
+                className="w-full sm:w-fit"
+                onClick={handleFinalize}
+                disabled={isFinalizePending}>
                 {isFinalizePending
                   ? "Saving..."
                   : `Finalize with "${suggestedResult ?? "0"}"`}
               </Button>
 
-              <div className="flex flex-col gap-1 items-center w-full mt-2 border-t pt-3">
-                <p className="text-xs text-gray-400">
-                  Didn't reach an agreement?
-                </p>
-
-                <Button
-                  variant="outline"
-                  onClick={handleReset}
-                  disabled={isResetPending}>
-                  {isResetPending ? "Restarting..." : "Restart Voting"}
-                </Button>
-              </div>
+              <Button
+                className="w-full sm:w-fit"
+                variant="outline"
+                onClick={handleReset}
+                disabled={isResetPending}>
+                {isResetPending ? "Restarting..." : "Restart Voting"}
+              </Button>
             </div>
           )}
         </div>
