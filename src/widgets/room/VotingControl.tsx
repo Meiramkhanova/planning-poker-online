@@ -5,6 +5,7 @@ import { useSubmitVote } from "@/features/submit-vote/model/useSubmitVote";
 import { useRevealRound } from "@/features/revealRound/model/useRevealRound";
 import { Button } from "@/shared/ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
+import { useResetRound } from "@/features/reset-round/model/useResetRound";
 
 interface VotingControlProps {
   currentTaskId: string | null;
@@ -37,6 +38,9 @@ function VotingControl({
   const { mutate: revealRound, isPending: isRevealPending } =
     useRevealRound(roomId);
 
+  const { mutate: resetRound, isPending: isResetPending } =
+    useResetRound(roomId);
+
   const handleVote = (value: string) => {
     if (!currentRoundId) return;
 
@@ -46,6 +50,11 @@ function VotingControl({
   const handleReveal = () => {
     if (!currentRoundId) return;
     revealRound(currentRoundId);
+  };
+
+  const handleReset = () => {
+    if (!currentRoundId) return;
+    resetRound(currentRoundId);
   };
 
   const isRevealDisabled = isRevealPending || !canReveal;
@@ -60,6 +69,7 @@ function VotingControl({
             : "Waiting for the moderator to select a task..."}
         </h3>
       )}
+
       {/* task chosen through select but round does not started yet */}
       {currentTaskId && !isRoundActive && (
         <div className="flex flex-col items-center gap-4 w-full">
@@ -74,21 +84,33 @@ function VotingControl({
           )}
         </div>
       )}
+
       {/* round started */}
       {currentTaskId && isRoundActive && roundStatus === "voting" && (
         <div className="flex flex-col items-center gap-4 w-full">
           {isOwner && (
-            <Tooltip>
-              <TooltipTrigger asChild>
-                <Button onClick={handleReveal} disabled={isRevealDisabled}>
-                  {isRevealPending ? "Revealing..." : "Reveal Cards"}
-                </Button>
-              </TooltipTrigger>
+            <div className="reveal-reset-btns flex items-center gap-4">
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button onClick={handleReveal} disabled={isRevealDisabled}>
+                    {isRevealPending ? "Revealing..." : "Reveal Cards"}
+                  </Button>
+                </TooltipTrigger>
 
-              <TooltipContent>
-                <p>Waiting for votes to be submitted...</p>
-              </TooltipContent>
-            </Tooltip>
+                {!canReveal && (
+                  <TooltipContent>
+                    <p>Waiting for votes to be submitted...</p>
+                  </TooltipContent>
+                )}
+              </Tooltip>
+
+              <Button
+                variant="outline"
+                onClick={handleReset}
+                disabled={isResetPending}>
+                {isResetPending ? "Resetting..." : "Reset Round"}
+              </Button>
+            </div>
           )}
 
           <h3 className="text-gray-700 text-center w-full text-sm">
@@ -121,10 +143,20 @@ function VotingControl({
           )}
 
           {isOwner && (
-            <p className="text-xs text-gray-500">
-              You can now finalize this task estimation from the backlog or
-              active card.
-            </p>
+            <div className="reset-info flex flex-col items-center gap-3">
+              <p className="text-xs text-gray-500 max-w-xs">
+                You can now finalize this task estimation from the backlog or
+                active card. If agreement wasn't reached, you can restart
+                voting.
+              </p>
+
+              <Button
+                variant="outline"
+                onClick={handleReset}
+                disabled={isResetPending}>
+                {isResetPending ? "Restarting..." : "Restart Voting"}
+              </Button>
+            </div>
           )}
         </div>
       )}
