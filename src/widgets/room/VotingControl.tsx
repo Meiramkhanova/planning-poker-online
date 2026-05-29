@@ -1,6 +1,6 @@
 import DeckPresets from "@/widgets/room/DeckPresets";
 import type { RoomDeckPreset } from "@/entities/room/model/types";
-import { StartRoundButton } from "@/features/start-voting";
+import { StartRoundButton } from "@/features/start-round";
 import { useSubmitVote } from "@/features/submit-vote/model/useSubmitVote";
 import { useRevealRound } from "@/features/revealRound/model/useRevealRound";
 import { Button } from "@/shared/ui/button";
