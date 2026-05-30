@@ -11,11 +11,11 @@ import VotingControl from "@/widgets/room/VotingControl";
 function RoomPage() {
   const { roomId } = useParams<{ roomId: string }>();
 
-  const { data, isLoading, isError } = useRoomById(roomId ?? "");
+  const { data, isLoading, isFetching, isError } = useRoomById(roomId ?? "");
 
   useRoomSocket(roomId ?? "");
 
-  if (isLoading) return <LoadingElement />;
+  if (isLoading && isFetching) return <LoadingElement />;
 
   if (isError) {
     return (

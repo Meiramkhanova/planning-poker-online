@@ -49,8 +49,6 @@ export const useRoomSocket = (roomId: string) => {
       };
 
       socket.onclose = (event) => {
-        console.log("Session closed:", event.code);
-
         if (event.code !== 1000) {
           reconnectTimerRef.current = setTimeout(() => {
             console.log("Trying to reconnect in 3 seconds...");
