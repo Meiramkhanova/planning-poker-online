@@ -29,11 +29,15 @@ function TaskCard({
       <div className="flex justify-between items-center">
         <span
           className={cn(
-            "text-[9px] uppercase px-2 py-0.5 rounded border border-gray-200",
+            "text-[10px] uppercase px-2 py-0.5 rounded border border-gray-200",
             "tracking-wider font-semibold text-sky-700 bg-sky-50",
             statusClassName,
           )}>
           {task.status}
+
+          {task.status === "estimated" && task.estimate_value && (
+            <span className="lowercase"> : {task.estimate_value} pt</span>
+          )}
         </span>
 
         {actionsToRender}
